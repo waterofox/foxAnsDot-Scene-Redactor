@@ -137,10 +137,12 @@
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\UI\Button.cpp" />
     <ClCompile Include="src\UI\Label.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\UI\Button.h" />
     <ClInclude Include="src\UI\Label.h" />
   </ItemGroup>
   <ItemGroup>

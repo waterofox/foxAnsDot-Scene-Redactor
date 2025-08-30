@@ -1,6 +1,10 @@
 #include "Application.h"
 
+//UI
+#include "UI/Button.h"
+
 void process_event_function(Core* the_core);
+void test_button_slot(Core* the_core,Scene_Component* component);
 
 Application::Application()
 {
@@ -15,13 +19,20 @@ Application::Application()
 
 	//defualt resources
 	resource_manager.add_font("src\\resources\\fonts\\IBM Plex Mono\\IBMPlexMono-Medium.ttf", IBM_Plex_Mono_Medium);
+	resource_manager.font(IBM_Plex_Mono_Medium).setSmooth(false);
+
+	resource_manager.add_font("src\\resources\\fonts\\IBM Plex Mono\\IBMPlexMono-Regular.ttf", IBM_PLex_Mono_Regular);
+	resource_manager.font(IBM_PLex_Mono_Regular).setSmooth(false);
+
+	resource_manager.add_font("src\\resources\\fonts\\IBM Plex Mono\\IBMPlexMono-Bold.ttf", IBM_PLex_Mono_Bold);
+	resource_manager.font(IBM_PLex_Mono_Bold).setSmooth(false);
 
 	//scene
-	testLabel.get_resource() = IBM_Plex_Mono_Medium;
-	testLabel.setFillColor(sf::Color::White);
-	testLabel.setPosition(sf::Vector2f(0, 0));
+	test_button = new Button("test", test_button_slot);
 
-	Core::lay_type lay0; lay0["test"] = &testLabel;
+	(*test_button).get_resource() = IBM_PLex_Mono_Bold;
+
+	Core::lay_type lay0; lay0["test"] = test_button;
 	this->scene.push_back(lay0);
 
 
@@ -39,12 +50,16 @@ std::queue<sf::Event::MouseButtonPressed>& Application::get_recent_clicks() { re
 
 void process_event_function(Core* the_core)
 {
+
 	APPLICATION
 
 	const auto onClose = [&application](const sf::Event::Closed&) {
 		application.close();
 	};
 	const auto onClick = [&application](const sf::Event::MouseButtonPressed& evnt) {
+
+		if (!application.recent_clicks.empty()) { application.recent_clicks.pop(); }
+		
 		application.get_recent_clicks().push(evnt);
 	};
 	const auto onResize = [&application](const sf::Event::Resized evnt) {
@@ -56,4 +71,8 @@ void process_event_function(Core* the_core)
 	};
 
 	application.handleEvents(onClose, onClick, onResize);
+}
+void test_button_slot(Core* the_core, Scene_Component* component)
+{
+	std::cout << "Button!\n";
 }
