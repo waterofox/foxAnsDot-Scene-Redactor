@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{918da9ec-da4d-4647-8132-f83088d5cfc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="defualt resources">
+      <UniqueIdentifier>{8ec2f697-47a3-4fd0-a06f-3cd85d4aa047}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Label.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Application.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Label.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Bold.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-BoldItalic.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ExtraLight.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ExtraLightItalic.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Italic.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Light.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-LightItalic.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Medium.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-MediumItalic.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Regular.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-SemiBold.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-SemiBoldItalic.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Thin.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ThinItalic.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+  </ItemGroup>
+</Project>
