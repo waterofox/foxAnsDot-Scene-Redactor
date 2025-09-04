@@ -2,6 +2,7 @@
 
 //UI
 #include "UI/Button.h"
+#include "UI/Input_Line.h"
 
 void process_event_function(Core* the_core);
 void test_button_slot(Core* the_core,Scene_Component* component);
@@ -28,6 +29,9 @@ Application::Application()
 	resource_manager.font(IBM_PLex_Mono_Bold).setSmooth(false);
 
 	//scene
+	test_ptr = new Input_Line();
+
+	Input_Line& test = *test_ptr;
 
 	test.get_resource() = IBM_PLex_Mono_Bold;
 	test.get_type_of_resource() = Resource_Manager::resource_type::font;
@@ -69,7 +73,10 @@ void process_event_function(Core* the_core)
 		camera.setSize(sf::Vector2f(800,800 / aspectRatio));
 	};
 	const auto onKeyboardInput = [&application](const sf::Event::TextEntered evnt) {
-		application.recent_keyboard_input = evnt.unicode;
+		if (evnt.unicode != '\b') 
+		{
+			application.recent_keyboard_input = evnt.unicode;
+		}
 	};
 	const auto onKeyPressed = [&application](const sf::Event::KeyPressed evnt) {
 		switch (evnt.scancode)
@@ -87,7 +94,7 @@ void process_event_function(Core* the_core)
 		}
 	};
 
-	application.handleEvents(onClose, onClick, onResize, onKeyboardInput,onKeyPressed);
+	application.handleEvents(onClose, onClick, onResize, onKeyboardInput, onKeyPressed);
 }
 void test_button_slot(Core* the_core, Scene_Component* component)
 {

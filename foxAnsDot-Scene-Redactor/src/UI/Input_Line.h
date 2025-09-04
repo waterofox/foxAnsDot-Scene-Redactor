@@ -1,8 +1,6 @@
 #pragma once
 #include "Label.h"
 
-class Application;
-
 class Input_Line : public Scene_Component, public sf::Drawable
 {
 private:
@@ -14,7 +12,7 @@ private:
 	//view
 	sf::RectangleShape body;
 	sf::RectangleShape caret;
-	Label text_label = Label(inputed_text);
+	Label text_label;
 
 	void add_sign_in_text(const std::string& buffer);
 	void remove_sign_from_text();

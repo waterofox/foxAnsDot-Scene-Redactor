@@ -1,19 +1,19 @@
-
+#pragma once
 //SDK
 #include <foxAndDot-SDK/Core.h>
-#include "UI/Input_Line.h"
 
 #define APPLICATION 	Application* casted_application = static_cast<Application*>(the_core); \
 						Application& application = (*casted_application);
 
 class Button;
+class Input_Line;
 
 class Application : public Core
 {
 
 private:
 
-	Input_Line test;
+	Input_Line* test_ptr = nullptr;
 
 public:
 

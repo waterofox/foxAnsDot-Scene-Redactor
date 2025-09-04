@@ -1,3 +1,4 @@
+#pragma once
 #include <foxAndDot-SDK/Core.h>
 
 class Label : public Scene_Component, public sf::Text

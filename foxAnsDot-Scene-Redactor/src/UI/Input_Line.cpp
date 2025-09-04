@@ -9,10 +9,12 @@
 void Input_Line::add_sign_in_text(const std::string& buffer)
 {
 	inputed_text.insert(inputed_text.begin()+caret_pos,buffer[0]);
+	caret_pos += 1;
 }
 void Input_Line::remove_sign_from_text()
 {
-	inputed_text.erase(inputed_text.begin() + caret_pos);
+	inputed_text.erase(inputed_text.begin() + (caret_pos-1));
+	caret_pos -= 1;
 }
 
 
@@ -29,7 +31,10 @@ Input_Line::Input_Line()
 	body.setOutlineColor(sf::Color::Black);
 
 	body.setOutlineThickness(5);
-	body.setSize(sf::Vector2f(300, 80));
+	body.setSize(sf::Vector2f(300, 20));
+
+	text_label.setFillColor(sf::Color::Black);
+	text_label.setCharacterSize(12);
 }
 Input_Line::~Input_Line() {}
 
@@ -59,6 +64,7 @@ void Input_Line::update(Core* the_core)
 			{
 				if (!is_active)
 				{
+					application.recent_keyboard_input = "";
 					body.setFillColor(GAINSBORO);
 				}
 				is_active = true;
@@ -87,5 +93,6 @@ void Input_Line::update(Core* the_core)
 		}
 
 	text_label.setPosition(body.getPosition());
+	text_label.setString(inputed_text);
 }
 
