@@ -28,14 +28,13 @@ Application::Application()
 	resource_manager.font(IBM_PLex_Mono_Bold).setSmooth(false);
 
 	//scene
-	test_button = new Button("test", test_button_slot);
 
-	(*test_button).get_resource() = IBM_PLex_Mono_Bold;
+	test.get_resource() = IBM_PLex_Mono_Bold;
+	test.get_type_of_resource() = Resource_Manager::resource_type::font;
 
-	Core::lay_type lay0; lay0["test"] = test_button;
-	this->scene.push_back(lay0);
+	Core::lay_type lay1; lay1["test"] = &test;
 
-
+	scene.push_back(lay1);
 
 	this->run(800, 800, "Fox&Dot Scene Redactor", sf::State::Windowed);
 	
@@ -69,8 +68,26 @@ void process_event_function(Core* the_core)
 
 		camera.setSize(sf::Vector2f(800,800 / aspectRatio));
 	};
+	const auto onKeyboardInput = [&application](const sf::Event::TextEntered evnt) {
+		application.recent_keyboard_input = evnt.unicode;
+	};
+	const auto onKeyPressed = [&application](const sf::Event::KeyPressed evnt) {
+		switch (evnt.scancode)
+		{
+		case sf::Keyboard::Scancode::Backspace: {
+			application.remove_sign = true; 
+			if (application.recent_keyboard_input.length() != 0) 
+			{
+				application.recent_keyboard_input = "";
+				application.remove_sign = false;
+			}
+		}
+		default:
+			break;
+		}
+	};
 
-	application.handleEvents(onClose, onClick, onResize);
+	application.handleEvents(onClose, onClick, onResize, onKeyboardInput,onKeyPressed);
 }
 void test_button_slot(Core* the_core, Scene_Component* component)
 {

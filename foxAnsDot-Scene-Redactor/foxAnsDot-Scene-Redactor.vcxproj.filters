@@ -33,6 +33,9 @@
     <ClCompile Include="src\UI\Button.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\UI\Input_Line.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -42,6 +45,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="src\UI\Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Input_Line.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
