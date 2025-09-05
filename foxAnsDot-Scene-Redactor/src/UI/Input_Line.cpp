@@ -31,10 +31,14 @@ Input_Line::Input_Line()
 	body.setOutlineColor(sf::Color::Black);
 
 	body.setOutlineThickness(5);
-	body.setSize(sf::Vector2f(300, 20));
+	body.setSize(sf::Vector2f(300, 28));
 
+	text_label.setCharacterSize(14);
 	text_label.setFillColor(sf::Color::Black);
-	text_label.setCharacterSize(12);
+
+	caret.setFillColor(sf::Color::Black);
+	caret.setSize(sf::Vector2f(1, 18));
+	caret.setOrigin(sf::Vector2f(0, 9));
 }
 Input_Line::~Input_Line() {}
 
@@ -51,12 +55,15 @@ void Input_Line::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(body,states);
 	target.draw(text_label, states);
+	if (is_active and show_caret) 
+	{
+		target.draw(caret, states);
+	}
 }
 
 void Input_Line::update(Core* the_core)
 {
 	APPLICATION
-		
 		if (!application.recent_clicks.empty())
 		{
 			sf::Event::MouseButtonPressed& re_click = application.recent_clicks.front();
@@ -65,9 +72,10 @@ void Input_Line::update(Core* the_core)
 				if (!is_active)
 				{
 					application.recent_keyboard_input = "";
-					body.setFillColor(GAINSBORO);
+					body.setFillColor(sf::Color::White);
 				}
 				is_active = true;
+
 				application.recent_clicks.pop();
 			}
 			else 
@@ -79,6 +87,17 @@ void Input_Line::update(Core* the_core)
 
 		if (is_active)
 		{
+			if (application.recent_key_pressed.scancode == sf::Keyboard::Scancode::Left and caret_pos != 0)
+			{
+				caret_pos -= 1;
+				application.recent_key_pressed.scancode = sf::Keyboard::Scancode::Unknown;
+			}
+			if (application.recent_key_pressed.scancode == sf::Keyboard::Scancode::Right and caret_pos != inputed_text.length())
+			{
+				caret_pos += 1;
+				application.recent_key_pressed.scancode = sf::Keyboard::Scancode::Unknown;
+			}
+
 			if (application.recent_keyboard_input.length() != 0) {
 				add_sign_in_text(application.recent_keyboard_input);
 				application.recent_keyboard_input = "";
@@ -90,9 +109,21 @@ void Input_Line::update(Core* the_core)
 				}
 				application.remove_sign = false;
 			}
-		}
+			
+			caret_timer += application.get_delta_time();
+			
+			if (caret_timer.asMilliseconds() >= 400) { show_caret = !show_caret; caret_timer = sf::Time::Zero; }
 
+			caret.setPosition(text_label.findCharacterPos(caret_pos));
+			caret.move(sf::Vector2f(0, body.getSize().y / 4));
+	
+		}
+		text_label.setString(inputed_text);
+
+		text_label.setOrigin(sf::Vector2f(0, text_label.getCharacterSize() / 2));
+
+	
 	text_label.setPosition(body.getPosition());
-	text_label.setString(inputed_text);
+	text_label.move(sf::Vector2f(5, body.getSize().y / 2));
 }
 

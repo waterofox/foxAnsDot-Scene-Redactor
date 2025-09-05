@@ -38,9 +38,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Application.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="src\UI\Label.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -92,6 +89,9 @@
       <Filter>defualt resources</Filter>
     </Font>
     <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ThinItalic.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\Monaspace Neon\MonaspaceNeon-Medium.otf">
       <Filter>defualt resources</Filter>
     </Font>
   </ItemGroup>

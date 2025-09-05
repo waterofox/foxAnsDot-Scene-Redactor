@@ -20,20 +20,19 @@ Application::Application()
 
 	//defualt resources
 	resource_manager.add_font("src\\resources\\fonts\\IBM Plex Mono\\IBMPlexMono-Medium.ttf", IBM_Plex_Mono_Medium);
-	resource_manager.font(IBM_Plex_Mono_Medium).setSmooth(false);
 
 	resource_manager.add_font("src\\resources\\fonts\\IBM Plex Mono\\IBMPlexMono-Regular.ttf", IBM_PLex_Mono_Regular);
-	resource_manager.font(IBM_PLex_Mono_Regular).setSmooth(false);
 
 	resource_manager.add_font("src\\resources\\fonts\\IBM Plex Mono\\IBMPlexMono-Bold.ttf", IBM_PLex_Mono_Bold);
-	resource_manager.font(IBM_PLex_Mono_Bold).setSmooth(false);
 
+	resource_manager.add_font("src\\resources\\fonts\\Monaspace Neon\\MonaspaceNeon-Medium.otf", MonaspaceNeon_Medium);
+	resource_manager.font(MonaspaceNeon_Medium).setSmooth(false);
 	//scene
 	test_ptr = new Input_Line();
 
 	Input_Line& test = *test_ptr;
 
-	test.get_resource() = IBM_PLex_Mono_Bold;
+	test.get_resource() = MonaspaceNeon_Medium;
 	test.get_type_of_resource() = Resource_Manager::resource_type::font;
 
 	Core::lay_type lay1; lay1["test"] = &test;
@@ -55,6 +54,15 @@ void process_event_function(Core* the_core)
 {
 
 	APPLICATION
+		if (application.started)
+		{
+			application.started = false;
+			sf::View& camera = application.get_camera();
+
+			float aspectRatio = float(800) / float(800);
+
+			camera.setSize(sf::Vector2f(800, 800 / aspectRatio));
+		}
 
 	const auto onClose = [&application](const sf::Event::Closed&) {
 		application.close();
@@ -79,6 +87,9 @@ void process_event_function(Core* the_core)
 		}
 	};
 	const auto onKeyPressed = [&application](const sf::Event::KeyPressed evnt) {
+		
+		application.recent_key_pressed = evnt;
+
 		switch (evnt.scancode)
 		{
 		case sf::Keyboard::Scancode::Backspace: {

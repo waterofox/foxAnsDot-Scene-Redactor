@@ -17,13 +17,16 @@ private:
 
 public:
 
+	bool started = true;
+
 	sf::Vector2f viewPosition = sf::Vector2f(0, 0);
 
 	enum system_fonts
 	{
 		IBM_Plex_Mono_Medium,
 		IBM_PLex_Mono_Regular,
-		IBM_PLex_Mono_Bold
+		IBM_PLex_Mono_Bold,
+		MonaspaceNeon_Medium
 	};
 	
 	//--------------------------------
@@ -32,6 +35,8 @@ public:
 
 	bool remove_sign = false;
 	std::string recent_keyboard_input = "";
+
+	sf::Event::KeyPressed recent_key_pressed;
 
 	//--------------------------------
 public:

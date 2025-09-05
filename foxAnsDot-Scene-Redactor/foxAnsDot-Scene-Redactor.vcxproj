@@ -142,7 +142,6 @@
     <ClCompile Include="src\UI\Label.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\UI\Button.h" />
     <ClInclude Include="src\UI\Input_Line.h" />
     <ClInclude Include="src\UI\Label.h" />
@@ -162,6 +161,7 @@
     <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-SemiBoldItalic.ttf" />
     <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Thin.ttf" />
     <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ThinItalic.ttf" />
+    <Font Include="src\resources\fonts\Monaspace Neon\MonaspaceNeon-Medium.otf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

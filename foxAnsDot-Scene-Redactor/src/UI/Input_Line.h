@@ -13,6 +13,9 @@ private:
 	sf::RectangleShape body;
 	sf::RectangleShape caret;
 	Label text_label;
+	bool show_caret = false;
+
+	sf::Time caret_timer = sf::Time::Zero;
 
 	void add_sign_in_text(const std::string& buffer);
 	void remove_sign_from_text();
