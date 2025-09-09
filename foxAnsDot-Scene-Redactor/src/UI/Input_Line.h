@@ -17,8 +17,10 @@ private:
 	unsigned short int caret_pos = 0;
 
 	//view
+public:
 	sf::RectangleShape body;
-	
+
+private:
 	Label text_label;
 	sf::Vector2i showed_text_border = sf::Vector2i(0, 0);
 
@@ -53,4 +55,5 @@ public:
 	~Input_Line();
 
 	const std::string&  get_text();
+	void clear();
 };

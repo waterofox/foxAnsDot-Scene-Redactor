@@ -33,6 +33,9 @@ Application::Application()
 	input->get_type_of_resource() = Resource_Manager::resource_type::font;
 	input->get_resource() = MonaspaceNeon_Medium;
 
+	input->body.setPosition(sf::Vector2f(-300, 0));
+	input->body.setSize(sf::Vector2f(300, 50))
+		;
 	confirm_input = new Button("confirm", confirm_input_slot);
 
 	confirm_input->get_type_of_resource() = Resource_Manager::resource_type::font;
@@ -111,4 +114,8 @@ void process_event_function(Core* the_core)
 }
 void confirm_input_slot(Core* the_core, Scene_Component* component)
 {
+	APPLICATION
+		Input_Line* line = static_cast<Input_Line*>(application.get_component("input"));
+	std::cout << line->get_text() << '\n';
+	line->clear();
 }

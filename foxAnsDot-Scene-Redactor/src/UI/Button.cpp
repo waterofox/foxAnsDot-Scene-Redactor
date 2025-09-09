@@ -29,7 +29,7 @@ void Button::update(Core* the_core)
 	sf::Vector2f cursor = the_core->mapPixelToCoords(sf::Mouse::getPosition(*the_core));
 	if (body.getGlobalBounds().contains(cursor))
 	{
-		if (body.getFillColor() != DARK_GREY) { body.setFillColor(GAINSBORO); }
+		if (body.getFillColor() != DARK_GREY) { body.setFillColor(sf::Color::White); }
 	}
 	else { body.setFillColor(LIGHT_GREY); }
 

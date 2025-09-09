@@ -11,6 +11,16 @@ const std::string& Input_Line::get_text()
 	return inputed_text;
 }
 
+void Input_Line::clear()
+{
+	inputed_text = "";
+	text_label.setString("");
+	showed_text_border = sf::Vector2i(0, 0);
+	caret_pos = 0;
+	fake_caret_pos = 0;
+	
+}
+
 void Input_Line::add_sign_in_text(const std::string& buffer)
 {
 	inputed_text.insert(inputed_text.begin()+caret_pos,buffer[0]);
@@ -69,7 +79,7 @@ Input_Line::Input_Line()
 	body.setFillColor(SILVER);
 	body.setOutlineColor(sf::Color::Black);
 
-	body.setOutlineThickness(5);
+	body.setOutlineThickness(1);
 	body.setSize(sf::Vector2f(300, 28));
 
 	text_label.setCharacterSize(14);
@@ -160,8 +170,8 @@ void Input_Line::update(Core* the_core)
 			
 			if (caret_timer.asMilliseconds() >= 400) { show_caret = !show_caret; caret_timer = sf::Time::Zero; }
 
-			caret.setPosition(text_label.findCharacterPos(fake_caret_pos));
-			caret.move(sf::Vector2f(0, body.getSize().y / 4));
+			caret.setPosition(sf::Vector2f( text_label.findCharacterPos(fake_caret_pos).x,body.getPosition().y));
+			caret.move(sf::Vector2f(0, body.getSize().y /2));
 
 			text_label.setString(inputed_text.substr(showed_text_border.x, showed_text_border.y + 1));
 
