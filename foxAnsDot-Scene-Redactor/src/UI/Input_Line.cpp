@@ -6,6 +6,11 @@
 #define  GAINSBORO sf::Color(220, 220, 220, 255)
 #define     SILVER sf::Color(192, 192, 192, 255)
 
+const std::string& Input_Line::get_text()
+{
+	return inputed_text;
+}
+
 void Input_Line::add_sign_in_text(const std::string& buffer)
 {
 	inputed_text.insert(inputed_text.begin()+caret_pos,buffer[0]);
@@ -69,6 +74,7 @@ Input_Line::Input_Line()
 
 	text_label.setCharacterSize(14);
 	text_label.setFillColor(sf::Color::Black);
+	text_label.setString("");
 
 	caret.setFillColor(sf::Color::Black);
 	caret.setSize(sf::Vector2f(1, 18));

@@ -13,7 +13,8 @@ class Application : public Core
 
 private:
 
-	Input_Line* test_ptr = nullptr;
+	Input_Line* input = nullptr;
+	Button* confirm_input = nullptr;
 
 public:
 

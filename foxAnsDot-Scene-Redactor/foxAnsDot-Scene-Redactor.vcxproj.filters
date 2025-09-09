@@ -47,6 +47,9 @@
     <ClInclude Include="src\UI\Input_Line.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="src\Application.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Bold.ttf">

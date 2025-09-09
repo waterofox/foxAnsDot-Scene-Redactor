@@ -5,7 +5,7 @@
 #include "UI/Input_Line.h"
 
 void process_event_function(Core* the_core);
-void test_button_slot(Core* the_core,Scene_Component* component);
+void confirm_input_slot(Core* the_core,Scene_Component* component);
 
 Application::Application()
 {
@@ -28,16 +28,18 @@ Application::Application()
 	resource_manager.add_font("src\\resources\\fonts\\Monaspace Neon\\MonaspaceNeon-Medium.otf", MonaspaceNeon_Medium);
 	resource_manager.font(MonaspaceNeon_Medium).setSmooth(false);
 	//scene
-	test_ptr = new Input_Line();
+	
+	input = new Input_Line();
+	input->get_type_of_resource() = Resource_Manager::resource_type::font;
+	input->get_resource() = MonaspaceNeon_Medium;
 
-	Input_Line& test = *test_ptr;
+	confirm_input = new Button("confirm", confirm_input_slot);
 
-	test.get_resource() = MonaspaceNeon_Medium;
-	test.get_type_of_resource() = Resource_Manager::resource_type::font;
+	confirm_input->get_type_of_resource() = Resource_Manager::resource_type::font;
+	confirm_input->get_resource() = MonaspaceNeon_Medium;
 
-	Core::lay_type lay1; lay1["test"] = &test;
-
-	scene.push_back(lay1);
+	Core::lay_type lay0; lay0["input"] = input; lay0["button"] = confirm_input;
+	scene.push_back(lay0);
 
 	this->run(800, 800, "Fox&Dot Scene Redactor", sf::State::Windowed);
 	
@@ -107,7 +109,6 @@ void process_event_function(Core* the_core)
 
 	application.handleEvents(onClose, onClick, onResize, onKeyboardInput, onKeyPressed);
 }
-void test_button_slot(Core* the_core, Scene_Component* component)
+void confirm_input_slot(Core* the_core, Scene_Component* component)
 {
-	std::cout << "Button!\n";
 }
