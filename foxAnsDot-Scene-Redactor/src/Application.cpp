@@ -59,6 +59,11 @@ void process_event_function(Core* the_core)
 {
 
 	APPLICATION
+
+		if (!application.recent_clicks.empty())
+		{
+			application.recent_clicks.pop();
+		}
 		if (application.started)
 		{
 			application.started = false;

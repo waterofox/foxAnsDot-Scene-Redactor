@@ -126,7 +126,6 @@ void Input_Line::update(Core* the_core)
 				}
 				is_active = true;
 
-				application.recent_clicks.pop();
 			}
 			else 
 			{

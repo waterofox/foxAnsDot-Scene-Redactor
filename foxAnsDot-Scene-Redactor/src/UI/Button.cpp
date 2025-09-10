@@ -41,7 +41,6 @@ void Button::update(Core* the_core)
 		sf::Event::MouseButtonPressed& recent_click = application.recent_clicks.front();
 	if (body.getGlobalBounds().contains(application.mapPixelToCoords(recent_click.position)))
 	{
-		application.recent_clicks.pop();
 		if (on_click != nullptr) { on_click(the_core, this); }
 		body.setFillColor(DARK_GREY);
 	}
