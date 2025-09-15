@@ -41,7 +41,7 @@ private:
 	void init_handling_fields();
 //---------------------------------------------------------------
 private:
-	void run(const unsigned int& window_width, const unsigned int& window_height, const std::string& title, const sf::State& state) override;
+	void run(const unsigned int& window_width, const unsigned int& window_height, const std::string& title, const sf::State& state);
 public:
 	Application();
 	~Application();

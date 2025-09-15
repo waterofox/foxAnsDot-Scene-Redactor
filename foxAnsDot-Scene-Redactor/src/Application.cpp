@@ -82,15 +82,15 @@ void process_event_function(Core* the_core)
 			}
 	};
 	//ON CLICK (RELEASED)
-	const auto onClickReleased = [&application](const sf::Event::MouseButtonPressed& evnt)
+	const auto onClickReleased = [&application](const sf::Event::MouseButtonReleased& evnt)
 	{
-			application.recent_mous_pressed_evnt = evnt;
+			application.recent_mous_released_evnt = evnt;
 
-			sf::Event::MouseButtonReleased& recent_released = application.recent_mous_released_evnt;
+			sf::Event::MouseButtonPressed& recent_pressed = application.recent_mous_pressed_evnt;
 
-			if (application.recent_mous_released_evnt.position.x != -1 and recent_released.button == evnt.button)
+			if (application.recent_mous_pressed_evnt.position.x != -1 and recent_pressed.button == evnt.button)
 			{
-				application.recent_mous_released_evnt.position = sf::Vector2i(-1, -1);
+				application.recent_mous_pressed_evnt.position = sf::Vector2i(-1, -1);
 			}
 	};
 
@@ -114,24 +114,29 @@ void process_event_function(Core* the_core)
 	//ON KEY PRESSED
 	const auto onKeyPressed = [&application](const sf::Event::KeyPressed evnt) {
 		
-		application.recent_key_pressed = evnt;
-
-		switch (evnt.scancode)
+		if (application.two_recent_keys_pressed.first.scancode != sf::Keyboard::Scancode::Unknown)
 		{
-		case sf::Keyboard::Scancode::Backspace: {
-			application.remove_sign = true; 
-			if (application.recent_keyboard_input.length() != 0) 
+			application.two_recent_keys_pressed.first = evnt;
+		}
+		else
+		{
+			if (application.two_recent_keys_pressed.second.scancode != sf::Keyboard::Scancode::Unknown)
 			{
-				application.recent_keyboard_input = "";
-				application.remove_sign = false;
+				application.two_recent_keys_pressed.second = evnt;
+			}
+			else
+			{
+				application.two_recent_keys_pressed.second = application.two_recent_keys_pressed.first;
+				application.two_recent_keys_pressed.first = evnt;
 			}
 		}
-		default:
-			break;
-		}
+	};
+
+	const auto onKeyReleased = [&application](const sf::Event::KeyPressed evnt) {
+		
 	};
 
 	//ON KEY RELEASED
 
-	application.handleEvents(onClose, onClick, onResize, onKeyboardInput, onKeyPressed);
+	application.handleEvents(onClose, onClickPressed,onClickReleased, onResize, onKeyboardInput, onKeyPressed,onKeyReleased);
 }
