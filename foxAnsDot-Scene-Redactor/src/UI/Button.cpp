@@ -37,8 +37,8 @@ void Button::update(Core* the_core)
 	//------------------------------------------------------------------------------------------
 
 	APPLICATION
-		if (application.recent_clicks.empty()) { return; }
-		sf::Event::MouseButtonPressed& recent_click = application.recent_clicks.front();
+		if (application.recent_mous_pressed_evnt.position.x == -1) { return; }
+		sf::Event::MouseButtonPressed& recent_click = application.recent_mous_pressed_evnt;
 	if (body.getGlobalBounds().contains(application.mapPixelToCoords(recent_click.position)))
 	{
 		if (on_click != nullptr) { on_click(the_core, this); }

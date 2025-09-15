@@ -5,11 +5,23 @@
 #include "UI/Input_Line.h"
 
 void process_event_function(Core* the_core);
-
+void confirm_input_slot(Core* the_core, Scene_Component* component);
 void Application::init_resources()
 {
 	resource_manager.add_font("src\\resources\\fonts\\Monaspace Neon\\MonaspaceNeon-Medium.otf", MonaspaceNeon_Medium);
 	resource_manager.font(MonaspaceNeon_Medium).setSmooth(false);
+}
+void Application::clear_key(Application& application,const sf::Keyboard::Scancode& scancode)
+{
+	if (application.two_recent_keys_pressed.first.scancode == scancode)
+	{
+		application.two_recent_keys_pressed.first = application.two_recent_keys_pressed.second;
+		application.two_recent_keys_pressed.first.scancode = sf::Keyboard::Scancode::Unknown;
+	}
+	else
+	{
+		application.two_recent_keys_pressed.second.scancode = sf::Keyboard::Scancode::Unknown;
+	}
 }
 void Application::init_handling_fields()
 {
@@ -43,11 +55,30 @@ Application::Application()
 {
 	//application
 	this->set_process_events_function(process_event_function);
+	init_resources();
+	init_handling_fields();
 
 	//view
 	sf::View& camera = this->get_camera();
 	camera.setCenter(sf::Vector2f(0, 0));
 	this->set_camera_mod(Core::camera_settings::static_camera);
+
+
+
+	input = new Input_Line();
+	input->get_type_of_resource() = Resource_Manager::resource_type::font;
+	input->get_resource() = MonaspaceNeon_Medium;
+
+	input->body.setPosition(sf::Vector2f(-300, 0));
+	input->body.setSize(sf::Vector2f(300, 50))
+		;
+	confirm_input = new Button("confirm", confirm_input_slot);
+
+	confirm_input->get_type_of_resource() = Resource_Manager::resource_type::font;
+	confirm_input->get_resource() = MonaspaceNeon_Medium;
+
+	Core::lay_type lay0; lay0["input"] = input; lay0["button"] = confirm_input;
+	scene.push_back(lay0);
 	
 
 
@@ -58,10 +89,21 @@ Application::Application()
 
 Application::~Application(){}
 
+void Application::clear_pressed_fields()
+{
+	recent_mous_pressed_evnt.button = sf::Mouse::Button::Left;
+	recent_mous_pressed_evnt.position = sf::Vector2i(-1, -1);
+
+	recent_keyboard_input = "";
+}
+
+
 void process_event_function(Core* the_core)
 {
 
 	APPLICATION
+
+		application.clear_pressed_fields();
 
 	//ON CLOSE
 	const auto onClose = [&application](const sf::Event::Closed&) 
@@ -114,29 +156,57 @@ void process_event_function(Core* the_core)
 	//ON KEY PRESSED
 	const auto onKeyPressed = [&application](const sf::Event::KeyPressed evnt) {
 		
-		if (application.two_recent_keys_pressed.first.scancode != sf::Keyboard::Scancode::Unknown)
+
+		if (application.two_recent_keys_pressed.first.scancode == sf::Keyboard::Scancode::Unknown)
 		{
 			application.two_recent_keys_pressed.first = evnt;
 		}
 		else
 		{
-			if (application.two_recent_keys_pressed.second.scancode != sf::Keyboard::Scancode::Unknown)
+			if (application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::Unknown)
 			{
 				application.two_recent_keys_pressed.second = evnt;
 			}
 			else
 			{
-				application.two_recent_keys_pressed.second = application.two_recent_keys_pressed.first;
-				application.two_recent_keys_pressed.first = evnt;
+				application.two_recent_keys_pressed.first = application.two_recent_keys_pressed.second;
+				application.two_recent_keys_pressed.second = evnt;
 			}
 		}
+		
 	};
 
-	const auto onKeyReleased = [&application](const sf::Event::KeyPressed evnt) {
+	const auto onKeyReleased = [&application](const sf::Event::KeyReleased evnt) {
+		if (application.two_recent_keys_released.first.scancode == sf::Keyboard::Scancode::Unknown)
+		{
+			application.two_recent_keys_released.first = evnt;
+		}
+		else
+		{
+			if (application.two_recent_keys_released.second.scancode == sf::Keyboard::Scancode::Unknown)
+			{
+				application.two_recent_keys_released.second = evnt;
+			}
+			else
+			{
+				application.two_recent_keys_released.first = application.two_recent_keys_released.second;
+				application.two_recent_keys_released.second = evnt;
+			}
+		}
 		
+		
+		Application::clear_key(application, evnt.scancode);
+
 	};
 
 	//ON KEY RELEASED
 
 	application.handleEvents(onClose, onClickPressed,onClickReleased, onResize, onKeyboardInput, onKeyPressed,onKeyReleased);
+}
+void confirm_input_slot(Core* the_core, Scene_Component* component)
+{
+	APPLICATION
+		Input_Line* line = static_cast<Input_Line*>(application.get_component("input"));
+	std::cout << line->get_text() << '\n';
+	line->clear();
 }

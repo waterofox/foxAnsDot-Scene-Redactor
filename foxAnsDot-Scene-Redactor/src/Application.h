@@ -10,9 +10,22 @@
 
 #define window_title "foxAndDot SDK - Scen Redactor"
 
+class Button;
+class Input_Line;
+
+
 class Application : public Core
 {
+
+private:
+
+	Input_Line* input = nullptr;
+	Button* confirm_input = nullptr;
+
+
 public:
+
+	static void clear_key(Application&,const sf::Keyboard::Scancode& scancode);
 
 	//on start
 	bool started = true;
@@ -39,6 +52,8 @@ public:
 	std::pair<sf::Event::KeyReleased, sf::Event::KeyReleased> two_recent_keys_released;//
 private:
 	void init_handling_fields();
+public:
+	void clear_pressed_fields();
 //---------------------------------------------------------------
 private:
 	void run(const unsigned int& window_width, const unsigned int& window_height, const std::string& title, const sf::State& state);

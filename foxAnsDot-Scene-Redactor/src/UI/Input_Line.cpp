@@ -114,9 +114,9 @@ void Input_Line::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void Input_Line::update(Core* the_core)
 {
 	APPLICATION
-		if (!application.recent_clicks.empty())
+		if (application.recent_mous_pressed_evnt.position.x != -1)
 		{
-			sf::Event::MouseButtonPressed& re_click = application.recent_clicks.front();
+			sf::Event::MouseButtonPressed& re_click = application.recent_mous_pressed_evnt;
 			if (body.getGlobalBounds().contains(application.mapPixelToCoords(re_click.position)))
 			{
 				if (!is_active)
@@ -136,19 +136,29 @@ void Input_Line::update(Core* the_core)
 
 		if (is_active)
 		{
-			if (application.recent_key_pressed.scancode == sf::Keyboard::Scancode::Left and caret_pos != 0)
+			if ((application.two_recent_keys_pressed.first.scancode == sf::Keyboard::Scancode::Left or\
+				 application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::Left) and caret_pos != 0)
 			{
 				caret_pos -= 1;
 				fake_caret_pos -= 1;
+				
+				if (application.two_recent_keys_pressed.first.scancode == sf::Keyboard::Scancode::LControl or \
+					application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::LControl)
+				{
+					std::cout << "CONTROL!\n";
+				}
 
-				application.recent_key_pressed.scancode = sf::Keyboard::Scancode::Unknown;
+				Application::clear_key(application, sf::Keyboard::Scancode::Left);
+
 			}
-			if (application.recent_key_pressed.scancode == sf::Keyboard::Scancode::Right and caret_pos != inputed_text.length())
+			if ((application.two_recent_keys_pressed.first.scancode == sf::Keyboard::Scancode::Right or \
+				 application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::Right) and caret_pos != inputed_text.length())
 			{
 				caret_pos += 1;
 				fake_caret_pos += 1;
 
-				application.recent_key_pressed.scancode = sf::Keyboard::Scancode::Unknown;
+				Application::clear_key(application, sf::Keyboard::Scancode::Right);
+
 			}
 
 			if (application.recent_keyboard_input.length() != 0) 
@@ -156,13 +166,15 @@ void Input_Line::update(Core* the_core)
 				add_sign_in_text(application.recent_keyboard_input);
 				application.recent_keyboard_input = "";
 			}
-			if (application.remove_sign) 
+			if (application.two_recent_keys_pressed.first.scancode == sf::Keyboard::Scancode::Backspace or\
+				application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::Backspace)
 			{
 				if (inputed_text.length() != 0)
 				{
 					remove_sign_from_text();
 				}
-				application.remove_sign = false;
+
+				Application::clear_key(application, sf::Keyboard::Scancode::Backspace);
 			}
 			
 			caret_timer += application.get_delta_time();
