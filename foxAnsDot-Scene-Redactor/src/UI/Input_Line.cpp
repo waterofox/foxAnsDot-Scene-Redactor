@@ -13,57 +13,24 @@ const std::string& Input_Line::get_text()
 
 void Input_Line::clear()
 {
-	inputed_text = "";
-	text_label.setString("");
-	showed_text_border = sf::Vector2i(0, 0);
-	caret_pos = 0;
-	fake_caret_pos = 0;
+
 	
 }
 
 void Input_Line::add_sign_in_text(const std::string& buffer)
 {
-	inputed_text.insert(inputed_text.begin()+caret_pos,buffer[0]);
-	caret_pos += 1;
-	fake_caret_pos += 1;
-	showed_text_border.y += 1;
+
 }
 void Input_Line::remove_sign_from_text()
 {
-	if (caret_pos == 0) { return; }
-	inputed_text.erase(inputed_text.begin() + (caret_pos-1));
-	caret_pos -= 1;
-	fake_caret_pos -= 1;
 
-	if (showed_text_border.y != 0)
-	{
-		showed_text_border.y -= 1;
-	}
+	
 }
 
 void Input_Line::move_text(const side& side)
 {
-	switch (side)
-	{
-	case right: 
-	{
-		if (showed_text_border.x != 0)
-		{
-			showed_text_border.x -= 1;
-			showed_text_border.y -= 1;
-		}
-	} break;
-	case left: 
-	{
-		if (showed_text_border.x < inputed_text.size()-1)
-		{
-			showed_text_border.x += 1;
-			showed_text_border.y += 1;
-		}
-	}break;
-	default:
-		break;
-	}
+
+
 }
 
 
@@ -176,29 +143,9 @@ void Input_Line::update(Core* the_core)
 
 				Application::clear_key(application, sf::Keyboard::Scancode::Backspace);
 			}
+			//caret
 			
-			caret_timer += application.get_delta_time();
-			
-			if (caret_timer.asMilliseconds() >= 400) { show_caret = !show_caret; caret_timer = sf::Time::Zero; }
 
-			caret.setPosition(sf::Vector2f( text_label.findCharacterPos(fake_caret_pos).x,body.getPosition().y));
-			caret.move(sf::Vector2f(0, body.getSize().y /2));
-
-			text_label.setString(inputed_text.substr(showed_text_border.x, showed_text_border.y + 1));
-
-			if (caret.getPosition().x >= body.getPosition().x + body.getSize().x-5)
-			{
-				move_text(left);
-				fake_caret_pos -= 1;	
-			}
-			else if (caret.getPosition().x <= body.getPosition().x + 5)
-			{
-				if (caret_pos != fake_caret_pos)
-				{
-					move_text(right);
-					fake_caret_pos += 1;
-				}
-			}
 	
 		}
 

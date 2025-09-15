@@ -77,7 +77,10 @@ Application::Application()
 	confirm_input->get_type_of_resource() = Resource_Manager::resource_type::font;
 	confirm_input->get_resource() = MonaspaceNeon_Medium;
 
-	Core::lay_type lay0; lay0["input"] = input; lay0["button"] = confirm_input;
+	Core::lay_type lay_1; lay_1["button"] = confirm_input;
+	Core::lay_type lay0; lay0["input"] = input; 
+	
+	scene.push_back(lay_1);
 	scene.push_back(lay0);
 	
 
