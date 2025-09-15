@@ -1,4 +1,7 @@
+#pragma once
 #include "Label.h"
+
+class Application;
 
 class Button : public Scene_Component, public sf::Drawable
 {

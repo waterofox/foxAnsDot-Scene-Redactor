@@ -33,16 +33,22 @@
     <ClCompile Include="src\UI\Button.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\UI\Input_Line.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Application.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="src\UI\Label.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="src\UI\Button.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Input_Line.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Application.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +92,9 @@
       <Filter>defualt resources</Filter>
     </Font>
     <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ThinItalic.ttf">
+      <Filter>defualt resources</Filter>
+    </Font>
+    <Font Include="src\resources\fonts\Monaspace Neon\MonaspaceNeon-Medium.otf">
       <Filter>defualt resources</Filter>
     </Font>
   </ItemGroup>
