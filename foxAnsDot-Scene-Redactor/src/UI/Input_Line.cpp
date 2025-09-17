@@ -34,7 +34,7 @@ Input_Line::Input_Line()
 	text_area.setFillColor(sf::Color::Transparent);
 	text_area.setOutlineThickness(2);
 
-
+	caret.setFillColor(sf::Color::Black);
 }
 Input_Line::~Input_Line() {}
 
@@ -69,7 +69,7 @@ void Input_Line::handle_input_event(Core*& the_core)
 		break;
 	case input_event::pop_back: {
 	
-		if (rcp >= 1)
+		if (rcp > 0)
 		{
 			inputed_text.pop_back();
 
@@ -91,14 +91,59 @@ void Input_Line::handle_input_event(Core*& the_core)
 		//clear data
 		Application::clear_key(application, sf::Keyboard::Scancode::Backspace);
 
-	}
-		break;
+	} break;
 	case input_event::erase:
 		break;
-	case input_event::move_rigth:
-		break;
-	case input_event::move_left:
-		break;
+	case input_event::move_rigth: {
+		
+		if (text_border.y < inputed_text.length()) { ++text_border.y; };
+		if (rcp < inputed_text.length())
+		{
+			++rcp;
+			++vcp;
+			if (vcp >= text_label.getString().getSize() and rcp != inputed_text.length())
+			{
+				++text_border.x;
+				--vcp;
+				text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+				while (text_label.getGlobalBounds().size.x >= text_area.getSize().x)
+				{
+					++text_border.x;
+					text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+				}
+			}
+			else
+			{
+				--text_border.y;
+			}
+		}
+		//clear data
+		Application::clear_key(application, sf::Keyboard::Scancode::Right);
+
+	} break;
+	case input_event::move_left:{
+
+		if (rcp > 0)
+		{
+			--rcp;
+			--vcp;
+
+			if (vcp <= 0 and rcp != 0) 
+			{
+				--text_border.x;
+				++vcp;
+				text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+
+				while (text_label.getGlobalBounds().size.x >= text_area.getSize().x)
+				{
+					--text_border.y;
+					text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+				}
+			}
+		}
+		Application::clear_key(application, sf::Keyboard::Scancode::Left);
+
+	} break;
 	default:
 		break;
 	}
@@ -128,6 +173,7 @@ void Input_Line::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	shape.setPosition(text_label.getGlobalBounds().position);
 
 	target.draw(shape, states);
+	target.draw(caret);
 }
 
 void Input_Line::update(Core* the_core)
@@ -162,6 +208,12 @@ void Input_Line::update(Core* the_core)
 	//text position
 	text_label.setPosition(text_area.getPosition());
 	text_label.move(sf::Vector2f(0, text_area.getSize().y / -2));
+	//caret positon
+	caret.setSize(sf::Vector2f(2, text_area.getSize().y));
+	caret.setOrigin(sf::Vector2f(0, caret.getSize().y / 2));
+	caret.setPosition(text_label.findCharacterPos(vcp));
+	caret.move(sf::Vector2f(0, text_area.getSize().y / 2));
+
 		
 		if (is_active)
 		{

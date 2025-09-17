@@ -31,7 +31,8 @@ private:
 
 	void handle_input_event(Core*& the_core);
 
-	//view
+	sf::RectangleShape caret;
+
 public:
 	sf::RectangleShape body;
 
