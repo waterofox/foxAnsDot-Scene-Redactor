@@ -11,29 +11,6 @@ const std::string& Input_Line::get_text()
 	return inputed_text;
 }
 
-void Input_Line::clear()
-{
-
-	
-}
-
-void Input_Line::add_sign_in_text(const std::string& buffer)
-{
-
-}
-void Input_Line::remove_sign_from_text()
-{
-
-	
-}
-
-void Input_Line::move_text(const side& side)
-{
-
-
-}
-
-
 sf::Drawable* Input_Line::as_drawable() { return this; }
 
 sf::FloatRect Input_Line::get_component_render_bounds() { return body.getGlobalBounds(); }
@@ -53,11 +30,79 @@ Input_Line::Input_Line()
 	text_label.setFillColor(sf::Color::Black);
 	text_label.setString("");
 
-	caret.setFillColor(sf::Color::Black);
-	caret.setSize(sf::Vector2f(1, 18));
-	caret.setOrigin(sf::Vector2f(0, 9));
+	text_area.setOutlineColor(sf::Color::Blue);
+	text_area.setFillColor(sf::Color::Transparent);
+	text_area.setOutlineThickness(2);
+
+
 }
 Input_Line::~Input_Line() {}
+
+void Input_Line::handle_input_event(Core*& the_core)
+{
+	APPLICATION
+
+	switch (recent_input_event)
+	{
+	case input_event::unknown: { return; } break;
+	case input_event::push_back: {
+
+		inputed_text.push_back(application.recent_keyboard_input[0]);
+		
+		++rcp;
+		++vcp;
+		++text_border.y;
+
+		text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+		while (text_label.getGlobalBounds().size.x >= text_area.getSize().x)
+		{
+			--vcp;
+			++text_border.x;
+			text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+		}
+
+		//clear data
+		application.recent_keyboard_input = "";
+
+	}break;
+	case input_event::insert:
+		break;
+	case input_event::pop_back: {
+	
+		if (rcp >= 1)
+		{
+			inputed_text.pop_back();
+
+			--rcp;
+			--vcp;
+			--text_border.y;
+
+			text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+
+			if (vcp == 0 and inputed_text.length() != 0)
+			{
+				++vcp;
+				--text_border.x;
+
+				text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+			}
+		}
+
+		//clear data
+		Application::clear_key(application, sf::Keyboard::Scancode::Backspace);
+
+	}
+		break;
+	case input_event::erase:
+		break;
+	case input_event::move_rigth:
+		break;
+	case input_event::move_left:
+		break;
+	default:
+		break;
+	}
+}
 
 void Input_Line::on_intersection(Core* the_core, Scene_Component* component) {}
 
@@ -71,16 +116,24 @@ void Input_Line::update_resource(const std::variant<sf::Texture*, sf::Font*>& re
 void Input_Line::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(body,states);
+	target.draw(text_area, states);
 	target.draw(text_label, states);
-	if (is_active and show_caret) 
-	{
-		target.draw(caret, states);
-	}
+
+	sf::RectangleShape shape;
+	shape.setFillColor(sf::Color::Transparent);
+	shape.setOutlineColor(sf::Color::Red);
+	shape.setOutlineThickness(2);
+
+	shape.setSize(text_label.getGlobalBounds().size);
+	shape.setPosition(text_label.getGlobalBounds().position);
+
+	target.draw(shape, states);
 }
 
 void Input_Line::update(Core* the_core)
 {
 	APPLICATION
+
 		if (application.recent_mous_pressed_evnt.position.x != -1)
 		{
 			sf::Event::MouseButtonPressed& re_click = application.recent_mous_pressed_evnt;
@@ -100,59 +153,49 @@ void Input_Line::update(Core* the_core)
 				is_active = false; 
 			}
 		}
-
+	
+	//text area position
+	text_area.setSize(sf::Vector2f(body.getSize().x - 10, text_label.getCharacterSize()));
+	text_area.setOrigin(sf::Vector2f(0, text_area.getSize().y / 2));
+	text_area.setPosition(body.getPosition());
+	text_area.move(sf::Vector2f((body.getSize().x - text_area.getSize().x) / 2, body.getSize().y / 2));
+	//text position
+	text_label.setPosition(text_area.getPosition());
+	text_label.move(sf::Vector2f(0, text_area.getSize().y / -2));
+		
 		if (is_active)
 		{
-			if ((application.two_recent_keys_pressed.first.scancode == sf::Keyboard::Scancode::Left or\
-				 application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::Left) and caret_pos != 0)
+			//keyboard input
+			if (application.recent_keyboard_input.length() != 0)
 			{
-				caret_pos -= 1;
-				fake_caret_pos -= 1;
-				
-				if (application.two_recent_keys_pressed.first.scancode == sf::Keyboard::Scancode::LControl or \
-					application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::LControl)
-				{
-					std::cout << "CONTROL!\n";
-				}
-
-				Application::clear_key(application, sf::Keyboard::Scancode::Left);
-
+				if (rcp == inputed_text.length()) { recent_input_event = push_back; }
+				else { recent_input_event = insert; }
 			}
-			if ((application.two_recent_keys_pressed.first.scancode == sf::Keyboard::Scancode::Right or \
-				 application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::Right) and caret_pos != inputed_text.length())
+			//remove sign
+			else if (application.two_recent_keys_pressed.first.scancode  == sf::Keyboard::Scancode::Backspace or \
+					 application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::Backspace)
 			{
-				caret_pos += 1;
-				fake_caret_pos += 1;
-
-				Application::clear_key(application, sf::Keyboard::Scancode::Right);
-
+				if (rcp == inputed_text.length()) { recent_input_event = pop_back; }
+				else { recent_input_event = erase; }
 			}
-
-			if (application.recent_keyboard_input.length() != 0) 
+			//move right
+			else if (application.two_recent_keys_pressed.first.scancode  == sf::Keyboard::Scancode::Right or \
+					 application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::Right)
 			{
-				add_sign_in_text(application.recent_keyboard_input);
-				application.recent_keyboard_input = "";
+				recent_input_event = move_rigth;
 			}
-			if (application.two_recent_keys_pressed.first.scancode == sf::Keyboard::Scancode::Backspace or\
-				application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::Backspace)
+			//move left
+			else if (application.two_recent_keys_pressed.first.scancode  == sf::Keyboard::Scancode::Left or \
+					 application.two_recent_keys_pressed.second.scancode == sf::Keyboard::Scancode::Left)
 			{
-				if (inputed_text.length() != 0)
-				{
-					remove_sign_from_text();
-				}
-
-				Application::clear_key(application, sf::Keyboard::Scancode::Backspace);
+				recent_input_event = move_left;
 			}
-			//caret
 			
+			handle_input_event(the_core);
 
-	
 		}
 
-		text_label.setOrigin(sf::Vector2f(0, text_label.getCharacterSize() / 2));
 
-	
-	text_label.setPosition(body.getPosition());
-	text_label.move(sf::Vector2f(5, body.getSize().y / 2));
+		recent_input_event = unknown;
 }
 
