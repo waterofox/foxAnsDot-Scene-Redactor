@@ -71,21 +71,19 @@ void Input_Line::handle_input_event(Core*& the_core)
 	
 		if (rcp > 0)
 		{
-			inputed_text.pop_back();
-
 			--rcp;
-			--vcp;
+			inputed_text.pop_back();
 			--text_border.y;
 
-			text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
-
-			if (vcp == 0 and inputed_text.length() != 0)
+			if (vcp == 1 and inputed_text.length() != 0) 
 			{
-				++vcp;
 				--text_border.x;
-
-				text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 			}
+			else
+			{
+				--vcp;
+			}
+			text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 		}
 
 		//clear data
@@ -96,7 +94,6 @@ void Input_Line::handle_input_event(Core*& the_core)
 		break;
 	case input_event::move_rigth: {
 		
-		if (text_border.y < inputed_text.length()) { ++text_border.y; };
 		if (rcp < inputed_text.length())
 		{
 			++rcp;
@@ -104,17 +101,15 @@ void Input_Line::handle_input_event(Core*& the_core)
 			if (vcp >= text_label.getString().getSize() and rcp != inputed_text.length())
 			{
 				++text_border.x;
+				++text_border.y;
 				--vcp;
 				text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 				while (text_label.getGlobalBounds().size.x >= text_area.getSize().x)
 				{
 					++text_border.x;
+					--vcp;
 					text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 				}
-			}
-			else
-			{
-				--text_border.y;
 			}
 		}
 		//clear data
