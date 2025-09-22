@@ -65,8 +65,35 @@ void Input_Line::handle_input_event(Core*& the_core)
 		application.recent_keyboard_input = "";
 
 	}break;
-	case input_event::insert:
-		break;
+	case input_event::insert:{
+
+		inputed_text.insert(inputed_text.begin() + rcp, application.recent_keyboard_input[0]);
+
+		++rcp;
+		++vcp;
+		++text_border.y;
+
+		text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+
+		while (text_label.getGlobalBounds().size.x >= text_area.getSize().x)
+		{
+
+			if (vcp == text_label.getString().getSize() - 1)
+			{
+				--vcp;
+				++text_border.x;
+			}
+			else
+			{
+				--text_border.y;
+			}
+			text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+		}
+
+		//clear data
+		application.recent_keyboard_input = "";
+
+	}break;
 	case input_event::pop_back: {
 	
 		if (rcp > 0)
