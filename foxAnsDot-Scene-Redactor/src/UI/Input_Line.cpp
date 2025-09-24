@@ -11,6 +11,11 @@ const std::string& Input_Line::get_text()
 	return inputed_text;
 }
 
+const bool& Input_Line::is_active_now()
+{
+	return is_active;
+}
+
 sf::Drawable* Input_Line::as_drawable() { return this; }
 
 sf::FloatRect Input_Line::get_component_render_bounds() { return body.getGlobalBounds(); }
