@@ -117,8 +117,68 @@ void Input_Line::handle_input_event(Core*& the_core)
 		Application::clear_key(application, sf::Keyboard::Scancode::Backspace);
 
 	} break;
-	case input_event::erase:
-		break;
+	case input_event::erase: {
+		if (rcp >= 1)
+		{
+
+			if (text_border.y < (inputed_text.size() - 1))
+			{
+				inputed_text.erase(inputed_text.begin() + (rcp - 1));
+
+				if (vcp == 1)
+				{
+					if (rcp == 1)
+					{
+						--vcp;
+						--rcp;
+					}
+					else
+					{
+						--rcp;
+						--text_border.x;
+						--text_border.y;
+					}
+				}
+				else
+				{
+					--vcp;
+					--rcp;
+				}
+			}
+			else
+			{
+				inputed_text.erase(inputed_text.begin() + (rcp - 1));
+
+				if (vcp == 1)
+				{
+					if (rcp == 1)
+					{
+						--vcp;
+						--rcp;
+						--text_border.y;
+					}
+					else
+					{
+						--rcp;
+						--text_border.x;
+					}
+
+				}
+				else
+				{
+					--vcp;
+					--rcp;
+					--text_border.y;
+				}
+			}
+		}
+
+		text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+
+		//clear data
+		Application::clear_key(application, sf::Keyboard::Scancode::Backspace);
+	
+	}break;
 	case input_event::move_rigth: {
 		
 		if (rcp < inputed_text.length())
