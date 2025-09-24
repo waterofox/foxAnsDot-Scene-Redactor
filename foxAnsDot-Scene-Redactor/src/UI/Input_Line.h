@@ -1,41 +1,42 @@
 #pragma once
 #include "Label.h"
 
+
 class Input_Line : public Scene_Component, public sf::Drawable
 {
 private:
-	enum side
+	enum input_event
 	{
-		right,
-		left
+		unknown,
+		push_back,
+		insert,
+		pop_back,
+		erase,
+		move_rigth,
+		move_left
 	};
 
 	bool is_active = false;
 
 	//text
 	std::string inputed_text = "";
-	unsigned short int caret_pos = 0;
+	unsigned short int rcp = 0;
+	unsigned short int vcp = 0;
 
-	//view
+	sf::RectangleShape text_area;
+	Label text_label;
+	sf::Vector2i text_border = sf::Vector2i(0, 0);
+
+	input_event recent_input_event = input_event::unknown;
+
+	void handle_input_event(Core*& the_core);
+
+	sf::RectangleShape caret;
+
 public:
 	sf::RectangleShape body;
 
 private:
-	Label text_label;
-	sf::Vector2i showed_text_border = sf::Vector2i(0, 0);
-
-	unsigned short int fake_caret_pos = 0;
-	bool show_caret = false;
-	sf::RectangleShape caret;
-	sf::Time caret_timer = sf::Time::Zero;
-
-	//work
-
-	void add_sign_in_text(const std::string& buffer);
-	void remove_sign_from_text();
-
-	void move_text(const side& side);
-
 	//overrided fox&Dot SDK
 	
 	void on_intersection(Core* the_core, Scene_Component* component) override;
@@ -55,5 +56,4 @@ public:
 	~Input_Line();
 
 	const std::string&  get_text();
-	void clear();
 };

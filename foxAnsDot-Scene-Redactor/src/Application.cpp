@@ -211,5 +211,4 @@ void confirm_input_slot(Core* the_core, Scene_Component* component)
 	APPLICATION
 		Input_Line* line = static_cast<Input_Line*>(application.get_component("input"));
 	std::cout << line->get_text() << '\n';
-	line->clear();
 }
