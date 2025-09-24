@@ -146,6 +146,7 @@
     <ClInclude Include="src\UI\Button.h" />
     <ClInclude Include="src\UI\Input_Line.h" />
     <ClInclude Include="src\UI\Label.h" />
+    <ClInclude Include="src\UI\UI_Component.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Bold.ttf" />

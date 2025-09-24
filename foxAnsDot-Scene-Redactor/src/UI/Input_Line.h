@@ -1,8 +1,9 @@
 #pragma once
+#include "UI_Component.h"
 #include "Label.h"
 
 
-class Input_Line : public Scene_Component, public sf::Drawable
+class Input_Line : public UI_Component
 {
 private:
 	enum input_event
@@ -33,9 +34,6 @@ private:
 
 	sf::RectangleShape caret;
 
-public:
-	sf::RectangleShape body;
-
 private:
 	//overrided fox&Dot SDK
 	
@@ -56,4 +54,5 @@ public:
 	~Input_Line();
 
 	const std::string&  get_text();
+	const bool& is_active_now();
 };
