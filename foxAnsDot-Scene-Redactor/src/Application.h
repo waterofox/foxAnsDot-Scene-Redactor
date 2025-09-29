@@ -12,15 +12,16 @@
 
 class Button;
 class Input_Line;
+class Horizontal_Layout;
 
 
 class Application : public Core
 {
 
 private:
-
-	Input_Line* input = nullptr;
-	Button* confirm_input = nullptr;
+	Button* button = nullptr;
+	Button* button2 = nullptr;
+	Horizontal_Layout* main_layout = nullptr;
 
 
 public:

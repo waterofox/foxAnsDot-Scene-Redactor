@@ -2,10 +2,10 @@
 
 //UI
 #include "UI/Button.h"
-#include "UI/Input_Line.h"
+#include "UI/Horizontal_Layout.h"
 
 void process_event_function(Core* the_core);
-void confirm_input_slot(Core* the_core, Scene_Component* component);
+void zaticka(Core* the_core, Scene_Component* component);
 void Application::init_resources()
 {
 	resource_manager.add_font("src\\resources\\fonts\\Monaspace Neon\\MonaspaceNeon-Medium.otf", MonaspaceNeon_Medium);
@@ -63,27 +63,23 @@ Application::Application()
 	camera.setCenter(sf::Vector2f(0, 0));
 	this->set_camera_mod(Core::camera_settings::static_camera);
 
+	button = new Button("A button", zaticka);
+	button->get_resource() = MonaspaceNeon_Medium;
+	button->get_type_of_resource() = Resource_Manager::resource_type::font;
 
+	button2 = new Button("B button", zaticka);
+	button->get_resource() = MonaspaceNeon_Medium;
+	button->get_type_of_resource() = Resource_Manager::resource_type::font;
 
-	input = new Input_Line();
-	input->get_type_of_resource() = Resource_Manager::resource_type::font;
-	input->get_resource() = MonaspaceNeon_Medium;
+	main_layout = new Horizontal_Layout();
+	main_layout->make_main();
+	main_layout->set_align(Layout::align::left_top);
+	main_layout->add_component(button,1);
+	main_layout->add_component(button2,2);
+	main_layout->get_type_of_resource() = Resource_Manager::resource_type::no_resource;
 
-	input->body.setPosition(sf::Vector2f(-300, 0));
-	input->body.setSize(sf::Vector2f(300, 50))
-		;
-	confirm_input = new Button("confirm", confirm_input_slot);
-
-	confirm_input->get_type_of_resource() = Resource_Manager::resource_type::font;
-	confirm_input->get_resource() = MonaspaceNeon_Medium;
-
-	Core::lay_type lay_1; lay_1["button"] = confirm_input;
-	Core::lay_type lay0; lay0["input"] = input; 
-	
-	scene.push_back(lay_1);
+	Core::lay_type lay0; lay0.emplace("la", main_layout); lay0.emplace("a", button); lay0.emplace("b", button2);
 	scene.push_back(lay0);
-	
-
 
 
 
@@ -141,11 +137,18 @@ void process_event_function(Core* the_core)
 
 	//ON RESIZE
 	const auto onResize = [&application](const sf::Event::Resized evnt) {
+		
+		sf::View& camera = application.get_camera();
+
+		camera.setSize(sf::Vector2f(evnt.size.x, evnt.size.y));
+		
+		/*
 		sf::View& camera = application.get_camera();
 
 		float aspectRatio = float(evnt.size.x) / float(evnt.size.y);
 
 		camera.setSize(sf::Vector2f(800,800 / aspectRatio));
+		*/
 	};
 	
 	//ON KEYBOARD INPUT
@@ -206,9 +209,7 @@ void process_event_function(Core* the_core)
 
 	application.handleEvents(onClose, onClickPressed,onClickReleased, onResize, onKeyboardInput, onKeyPressed,onKeyReleased);
 }
-void confirm_input_slot(Core* the_core, Scene_Component* component)
+
+void zaticka(Core* the_core, Scene_Component* component)
 {
-	APPLICATION
-		Input_Line* line = static_cast<Input_Line*>(application.get_component("input"));
-	std::cout << line->get_text() << '\n';
 }
