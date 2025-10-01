@@ -3,6 +3,7 @@
 //UI
 #include "UI/Button.h"
 #include "UI/Horizontal_Layout.h"
+#include "UI/Vertical_Layout.h"
 
 void process_event_function(Core* the_core);
 void zaticka(Core* the_core, Scene_Component* component);
@@ -63,22 +64,42 @@ Application::Application()
 	camera.setCenter(sf::Vector2f(0, 0));
 	this->set_camera_mod(Core::camera_settings::static_camera);
 
-	button = new Button("A button", zaticka);
+	Button* button = new Button("A button", zaticka);
+	button->set_max_heigth(100);
 	button->get_resource() = MonaspaceNeon_Medium;
 	button->get_type_of_resource() = Resource_Manager::resource_type::font;
 
-	button2 = new Button("B button", zaticka);
-	button->get_resource() = MonaspaceNeon_Medium;
-	button->get_type_of_resource() = Resource_Manager::resource_type::font;
+	Button* button2 = new Button("B button", zaticka);
+	button2->set_max_heigth(100);
+	button2->get_resource() = MonaspaceNeon_Medium;
+	button2->get_type_of_resource() = Resource_Manager::resource_type::font;
 
-	main_layout = new Horizontal_Layout();
+	Layout* main_layout = new Horizontal_Layout();
 	main_layout->make_main();
 	main_layout->set_align(Layout::align::left_top);
-	main_layout->add_component(button,1);
-	main_layout->add_component(button2,2);
 	main_layout->get_type_of_resource() = Resource_Manager::resource_type::no_resource;
 
-	Core::lay_type lay0; lay0.emplace("la", main_layout); lay0.emplace("a", button); lay0.emplace("b", button2);
+	Vertical_Layout buttons_layout;
+	buttons_layout.add_component(button);
+	buttons_layout.add_component(button2);
+	buttons_layout.get_type_of_resource() = Resource_Manager::resource_type::no_resource;
+	buttons_layout.body.setFillColor(sf::Color(169, 169, 169, 255));
+
+	buttons_layout.body.setOutlineThickness(0);
+
+	Horizontal_Layout content_layout;
+	content_layout.get_type_of_resource() = Resource_Manager::resource_type::no_resource;
+	content_layout.body.setFillColor(sf::Color::White);
+
+	content_layout.body.setOutlineThickness(0);
+
+	main_layout->add_component(&buttons_layout,1);
+	main_layout->add_component(&content_layout,3);
+
+	Core::lay_type laym1; 	laym1.emplace("lay", &buttons_layout); laym1.emplace("lay2", &content_layout); laym1.emplace("la", main_layout);
+	Core::lay_type lay0; lay0.emplace("a", button); lay0.emplace("b", button2);
+
+	scene.push_back(laym1);
 	scene.push_back(lay0);
 
 

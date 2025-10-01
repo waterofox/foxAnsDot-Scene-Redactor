@@ -19,6 +19,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="UI base">
+      <UniqueIdentifier>{74bcdbd7-f73b-4eda-99ee-cbdf70914e03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -36,17 +39,17 @@
     <ClCompile Include="src\UI\Input_Line.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="Layout.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\Layout.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="src\UI\Horizontal_Layout.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\UI\UI_Component.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="src\UI\base\Layout.cpp">
+      <Filter>UI base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\base\UI_Component.cpp">
+      <Filter>UI base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Vertical_Layout.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,13 +65,16 @@
     <ClInclude Include="src\Application.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Layout.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI\Layout.h">
+    <ClInclude Include="src\UI\Horizontal_Layout.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="src\UI\Horizontal_Layout.h">
+    <ClInclude Include="src\UI\base\Layout.h">
+      <Filter>UI base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\base\UI_Component.h">
+      <Filter>UI base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Vertical_Layout.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

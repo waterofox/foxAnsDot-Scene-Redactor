@@ -1,11 +1,11 @@
 #pragma once
 #include "base/Layout.h"
-class Horizontal_Layout : public Layout
+class Vertical_Layout : public Layout
 {
 private:
 	void layout_members() override;
 public:
-	Horizontal_Layout();
-	~Horizontal_Layout();
+	Vertical_Layout();
+	~Vertical_Layout();
 };
 

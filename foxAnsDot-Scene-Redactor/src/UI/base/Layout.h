@@ -8,7 +8,7 @@ class Layout : public UI_Component
 public:
 	enum align
 	{
-		left, rigth, top, bottom, left_top, left_bottom, rigth_top, rigth_bottom, center,top_center,bottom_center
+		left, rigth, top, bottom, left_top, left_bottom, rigth_top, rigth_bottom, center
 	};
 protected:
 	//general properties
@@ -37,6 +37,7 @@ protected:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 public:
+	Layout();
 	virtual ~Layout() = default;
 
 	void add_component(UI_Component* component_ptr);

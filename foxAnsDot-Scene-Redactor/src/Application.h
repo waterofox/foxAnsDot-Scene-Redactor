@@ -10,19 +10,8 @@
 
 #define window_title "foxAndDot SDK - Scen Redactor"
 
-class Button;
-class Input_Line;
-class Horizontal_Layout;
-
-
 class Application : public Core
 {
-
-private:
-	Button* button = nullptr;
-	Button* button2 = nullptr;
-	Horizontal_Layout* main_layout = nullptr;
-
 
 public:
 

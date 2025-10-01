@@ -1,5 +1,5 @@
 #include "Layout.h"
-#include "../Application.h"
+#include "../../Application.h"
 
 void Layout::update(Core* the_core)
 {
@@ -52,6 +52,14 @@ sf::FloatRect Layout::get_component_bounds()
 void Layout::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(body,states);
+}
+
+Layout::Layout()
+{
+	layout_align = align::left_top;
+	this->get_type_of_resource() = Resource_Manager::resource_type::no_resource;
+
+	body.setFillColor(sf::Color::Transparent);
 }
 
 void Layout::add_component(UI_Component* component_ptr)

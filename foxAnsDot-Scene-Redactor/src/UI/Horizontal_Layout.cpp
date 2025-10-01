@@ -52,7 +52,7 @@ void Horizontal_Layout::layout_members()
 			last_pos.x -= component->body.getSize().x;
 		}
 	}break;
-	case Layout::top_center: 
+	case Layout::top: 
 	{
 		sf::Vector2f last_pos = sf::Vector2f(body.getGlobalBounds().getCenter());
 		last_pos.y = body.getPosition().y;
@@ -140,10 +140,10 @@ void Horizontal_Layout::layout_members()
 			last_pos.x -= component->body.getSize().x;
 		}
 	} break;
-	case Layout::bottom_center: 
+	case Layout::bottom: 
 	{
 		sf::Vector2f last_pos = sf::Vector2f(body.getGlobalBounds().getCenter());
-		last_pos.y = body.getPosition().y;
+		last_pos.y = body.getPosition().y + body.getSize().y;;
 		last_pos.x -= full_members_width / 2;
 
 		for (int i = 0; i < members_vector.size(); ++i)
@@ -151,7 +151,7 @@ void Horizontal_Layout::layout_members()
 			UI_Component*& component = members_vector[i];
 
 			component->body.setPosition(last_pos);
-			component->body.move(sf::Vector2f(0, -(component->body.getSize().x)));
+			component->body.move(sf::Vector2f(0, -(component->body.getSize().y)));
 
 			last_pos.x += component->body.getSize().x;
 		}
@@ -161,11 +161,9 @@ void Horizontal_Layout::layout_members()
 	}
 }
 
-Horizontal_Layout::Horizontal_Layout()
+Horizontal_Layout::Horizontal_Layout() : Layout()
 {
-	body.setFillColor(sf::Color::Transparent);
-	body.setOutlineColor(sf::Color::Green);
-	body.setOutlineThickness(5);
+	layout_align = Layout::left_top;
 }
 
 Horizontal_Layout::~Horizontal_Layout()
