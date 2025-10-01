@@ -2,10 +2,11 @@
 
 //UI
 #include "UI/Button.h"
-#include "UI/Input_Line.h"
+#include "UI/Horizontal_Layout.h"
+#include "UI/Vertical_Layout.h"
 
 void process_event_function(Core* the_core);
-void confirm_input_slot(Core* the_core, Scene_Component* component);
+void zaticka(Core* the_core, Scene_Component* component);
 void Application::init_resources()
 {
 	resource_manager.add_font("src\\resources\\fonts\\Monaspace Neon\\MonaspaceNeon-Medium.otf", MonaspaceNeon_Medium);
@@ -63,27 +64,43 @@ Application::Application()
 	camera.setCenter(sf::Vector2f(0, 0));
 	this->set_camera_mod(Core::camera_settings::static_camera);
 
+	Button* button = new Button("A button", zaticka);
+	button->set_max_heigth(100);
+	button->get_resource() = MonaspaceNeon_Medium;
+	button->get_type_of_resource() = Resource_Manager::resource_type::font;
 
+	Button* button2 = new Button("B button", zaticka);
+	button2->set_max_heigth(100);
+	button2->get_resource() = MonaspaceNeon_Medium;
+	button2->get_type_of_resource() = Resource_Manager::resource_type::font;
 
-	input = new Input_Line();
-	input->get_type_of_resource() = Resource_Manager::resource_type::font;
-	input->get_resource() = MonaspaceNeon_Medium;
+	Layout* main_layout = new Horizontal_Layout();
+	main_layout->make_main();
+	main_layout->set_align(Layout::align::left_top);
+	main_layout->get_type_of_resource() = Resource_Manager::resource_type::no_resource;
 
-	input->body.setPosition(sf::Vector2f(-300, 0));
-	input->body.setSize(sf::Vector2f(300, 50))
-		;
-	confirm_input = new Button("confirm", confirm_input_slot);
+	Vertical_Layout buttons_layout;
+	buttons_layout.add_component(button);
+	buttons_layout.add_component(button2);
+	buttons_layout.get_type_of_resource() = Resource_Manager::resource_type::no_resource;
+	buttons_layout.body.setFillColor(sf::Color(169, 169, 169, 255));
 
-	confirm_input->get_type_of_resource() = Resource_Manager::resource_type::font;
-	confirm_input->get_resource() = MonaspaceNeon_Medium;
+	buttons_layout.body.setOutlineThickness(0);
 
-	Core::lay_type lay_1; lay_1["button"] = confirm_input;
-	Core::lay_type lay0; lay0["input"] = input; 
-	
-	scene.push_back(lay_1);
+	Horizontal_Layout content_layout;
+	content_layout.get_type_of_resource() = Resource_Manager::resource_type::no_resource;
+	content_layout.body.setFillColor(sf::Color::White);
+
+	content_layout.body.setOutlineThickness(0);
+
+	main_layout->add_component(&buttons_layout,1);
+	main_layout->add_component(&content_layout,3);
+
+	Core::lay_type laym1; 	laym1.emplace("lay", &buttons_layout); laym1.emplace("lay2", &content_layout); laym1.emplace("la", main_layout);
+	Core::lay_type lay0; lay0.emplace("a", button); lay0.emplace("b", button2);
+
+	scene.push_back(laym1);
 	scene.push_back(lay0);
-	
-
 
 
 
@@ -141,11 +158,18 @@ void process_event_function(Core* the_core)
 
 	//ON RESIZE
 	const auto onResize = [&application](const sf::Event::Resized evnt) {
+		
+		sf::View& camera = application.get_camera();
+
+		camera.setSize(sf::Vector2f(evnt.size.x, evnt.size.y));
+		
+		/*
 		sf::View& camera = application.get_camera();
 
 		float aspectRatio = float(evnt.size.x) / float(evnt.size.y);
 
 		camera.setSize(sf::Vector2f(800,800 / aspectRatio));
+		*/
 	};
 	
 	//ON KEYBOARD INPUT
@@ -206,9 +230,7 @@ void process_event_function(Core* the_core)
 
 	application.handleEvents(onClose, onClickPressed,onClickReleased, onResize, onKeyboardInput, onKeyPressed,onKeyReleased);
 }
-void confirm_input_slot(Core* the_core, Scene_Component* component)
+
+void zaticka(Core* the_core, Scene_Component* component)
 {
-	APPLICATION
-		Input_Line* line = static_cast<Input_Line*>(application.get_component("input"));
-	std::cout << line->get_text() << '\n';
 }

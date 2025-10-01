@@ -10,18 +10,8 @@
 
 #define window_title "foxAndDot SDK - Scen Redactor"
 
-class Button;
-class Input_Line;
-
-
 class Application : public Core
 {
-
-private:
-
-	Input_Line* input = nullptr;
-	Button* confirm_input = nullptr;
-
 
 public:
 
