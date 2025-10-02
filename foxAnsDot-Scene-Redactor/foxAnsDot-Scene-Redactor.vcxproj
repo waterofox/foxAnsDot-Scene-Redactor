@@ -143,6 +143,7 @@
     <ClCompile Include="src\UI\Horizontal_Layout.cpp" />
     <ClCompile Include="src\UI\Input_Line.cpp" />
     <ClCompile Include="src\UI\Label.cpp" />
+    <ClCompile Include="src\UI\Scrollbar.cpp" />
     <ClCompile Include="src\UI\Vertical_Layout.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="src\UI\Horizontal_Layout.h" />
     <ClInclude Include="src\UI\Input_Line.h" />
     <ClInclude Include="src\UI\Label.h" />
+    <ClInclude Include="src\UI\Scrollbar.h" />
     <ClInclude Include="src\UI\Vertical_Layout.h" />
   </ItemGroup>
   <ItemGroup>
