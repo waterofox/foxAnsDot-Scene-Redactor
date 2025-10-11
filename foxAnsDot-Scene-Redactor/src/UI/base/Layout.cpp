@@ -10,24 +10,6 @@ void Layout::update(Core* the_core)
 			sf::Vector2f newSize = sf::Vector2f(application.getSize());
 			
 			handle_new_size(newSize);
-			/*
-			if (max_width < newSize.x);
-			{
-				newSize.x = max_width;
-			}
-			if (max_heigth < newSize.y)
-			{
-				newSize.y = max_heigth;
-			}
-			if (min_width > newSize.x)
-			{
-				newSize.x = min_width;
-			}
-			if (min_heigth > newSize.y)
-			{
-				newSize.y = min_heigth;
-			}
-			*/
 			body.setSize(newSize);
 	}
 	layout_members();

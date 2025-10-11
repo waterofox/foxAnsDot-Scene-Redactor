@@ -22,6 +22,9 @@
     <Filter Include="UI base">
       <UniqueIdentifier>{74bcdbd7-f73b-4eda-99ee-cbdf70914e03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\SCROLLBAR">
+      <UniqueIdentifier>{04021381-5fab-45a9-a9b1-a6998c0f8e9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -51,6 +54,12 @@
     <ClCompile Include="src\UI\Vertical_Layout.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\UI\scrollbar\Scrollbar.cpp">
+      <Filter>UI\SCROLLBAR</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\scrollbar\Scrollbar_Element.cpp">
+      <Filter>UI\SCROLLBAR</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\UI\Label.h">
@@ -77,50 +86,14 @@
     <ClInclude Include="src\UI\Vertical_Layout.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="src\UI\scrollbar\Scrollbar.h">
+      <Filter>UI\SCROLLBAR</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\scrollbar\Scrollbar_Element.h">
+      <Filter>UI\SCROLLBAR</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Bold.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-BoldItalic.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ExtraLight.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ExtraLightItalic.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Italic.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Light.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-LightItalic.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Medium.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-MediumItalic.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Regular.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-SemiBold.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-SemiBoldItalic.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Thin.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ThinItalic.ttf">
-      <Filter>defualt resources</Filter>
-    </Font>
     <Font Include="src\resources\fonts\Monaspace Neon\MonaspaceNeon-Medium.otf">
       <Filter>defualt resources</Filter>
     </Font>

@@ -1,7 +1,7 @@
 #include "Application.h"
 
 //UI
-#include "UI/Button.h"
+#include "UI/Input_Line.h"
 #include "UI/Horizontal_Layout.h"
 #include "UI/Vertical_Layout.h"
 
@@ -61,49 +61,63 @@ Application::Application()
 
 	//view
 	sf::View& camera = this->get_camera();
+
 	camera.setCenter(sf::Vector2f(0, 0));
 	this->set_camera_mod(Core::camera_settings::static_camera);
 
-	Button* button = new Button("A button", zaticka);
-	button->set_max_heigth(100);
-	button->get_resource() = MonaspaceNeon_Medium;
-	button->get_type_of_resource() = Resource_Manager::resource_type::font;
+	//interface
+	//main
+	Vertical_Layout application_layout;
+	application_layout.make_main();
+	application_layout.body.setFillColor(sf::Color(22, 26, 31));
+	application_layout.set_align(Layout::align::left);
 
-	Button* button2 = new Button("B button", zaticka);
-	button2->set_max_heigth(100);
-	button2->get_resource() = MonaspaceNeon_Medium;
-	button2->get_type_of_resource() = Resource_Manager::resource_type::font;
+	//command menu
+	Horizontal_Layout command_menu;
+	command_menu.set_min_heigth(50);
+	command_menu.body.setFillColor(sf::Color(85,97,120));
 
-	Layout* main_layout = new Horizontal_Layout();
-	main_layout->make_main();
-	main_layout->set_align(Layout::align::left_top);
-	main_layout->get_type_of_resource() = Resource_Manager::resource_type::no_resource;
+	Input_Line line;
+	line.set_max_width(800);
+	line.set_max_heigth(50);
 
-	Vertical_Layout buttons_layout;
-	buttons_layout.add_component(button);
-	buttons_layout.add_component(button2);
-	buttons_layout.get_type_of_resource() = Resource_Manager::resource_type::no_resource;
-	buttons_layout.body.setFillColor(sf::Color(169, 169, 169, 255));
+	line.get_resource() = MonaspaceNeon_Medium;
+	line.get_type_of_resource() = Resource_Manager::resource_type::font;
 
-	buttons_layout.body.setOutlineThickness(0);
+	command_menu.add_component(&line);
+	command_menu.set_align(Layout::align::center);
 
-	Horizontal_Layout content_layout;
-	content_layout.get_type_of_resource() = Resource_Manager::resource_type::no_resource;
-	content_layout.body.setFillColor(sf::Color::White);
+	//scene components & properties
+	Vertical_Layout menu;
+	menu.body.setFillColor(sf::Color(42, 49, 59));
 
-	content_layout.body.setOutlineThickness(0);
+	//scene
+	Horizontal_Layout scene_layout;
 
-	main_layout->add_component(&buttons_layout,1);
-	main_layout->add_component(&content_layout,3);
-
-	Core::lay_type laym1; 	laym1.emplace("lay", &buttons_layout); laym1.emplace("lay2", &content_layout); laym1.emplace("la", main_layout);
-	Core::lay_type lay0; lay0.emplace("a", button); lay0.emplace("b", button2);
-
-	scene.push_back(laym1);
-	scene.push_back(lay0);
+	//work_area
+	Horizontal_Layout work_area;
+	work_area.add_component(&scene_layout, 7);
+	work_area.add_component(&menu, 2);
 
 
+	application_layout.add_component(&command_menu,1);
+	application_layout.add_component(&work_area,20);
 
+	//build scene
+	Core::lay_type layouts;
+	Core::lay_type layouts2;
+	Core::lay_type lay_of_ui_components;
+	layouts.emplace("main_Layout", &application_layout);
+	layouts2.emplace("command_menu", &command_menu);
+	layouts2.emplace("work_layout", &work_area);
+	layouts2.emplace("menu", &menu);
+
+	lay_of_ui_components.emplace("input_line", &line);
+
+
+	scene.push_back(layouts);
+	scene.push_back(layouts2);
+	scene.push_back(lay_of_ui_components);
 	this->run(800, 800, "Fox&Dot Scene Redactor", sf::State::Windowed);
 }
 

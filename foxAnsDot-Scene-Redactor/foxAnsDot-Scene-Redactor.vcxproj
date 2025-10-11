@@ -109,12 +109,12 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>dependencies\foxAndDot-SDK-1.0.0\include;dependencies\SFML-3.0.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>dependencies\foxAndDot-SDK-1.0.1.2\include;dependencies\SFML-3.0.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>dependencies\foxAndDot-SDK-1.0.0\lib;dependencies\SFML-3.0.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>dependencies\foxAndDot-SDK-1.0.1.2\lib\Debug;dependencies\SFML-3.0.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>foxAndDot-SDK.lib;sfml-system-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -143,6 +143,8 @@
     <ClCompile Include="src\UI\Horizontal_Layout.cpp" />
     <ClCompile Include="src\UI\Input_Line.cpp" />
     <ClCompile Include="src\UI\Label.cpp" />
+    <ClCompile Include="src\UI\scrollbar\Scrollbar.cpp" />
+    <ClCompile Include="src\UI\scrollbar\Scrollbar_Element.cpp" />
     <ClCompile Include="src\UI\Vertical_Layout.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,23 +155,11 @@
     <ClInclude Include="src\UI\Horizontal_Layout.h" />
     <ClInclude Include="src\UI\Input_Line.h" />
     <ClInclude Include="src\UI\Label.h" />
+    <ClInclude Include="src\UI\scrollbar\Scrollbar.h" />
+    <ClInclude Include="src\UI\scrollbar\Scrollbar_Element.h" />
     <ClInclude Include="src\UI\Vertical_Layout.h" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Bold.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-BoldItalic.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ExtraLight.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ExtraLightItalic.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Italic.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Light.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-LightItalic.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Medium.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-MediumItalic.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Regular.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-SemiBold.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-SemiBoldItalic.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-Thin.ttf" />
-    <Font Include="src\resources\fonts\IBM Plex Mono\IBMPlexMono-ThinItalic.ttf" />
     <Font Include="src\resources\fonts\Monaspace Neon\MonaspaceNeon-Medium.otf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

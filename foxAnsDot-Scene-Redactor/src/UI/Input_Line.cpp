@@ -16,6 +16,11 @@ const bool& Input_Line::is_active_now()
 	return is_active;
 }
 
+void Input_Line::set_active_color(const sf::Color& color)
+{
+	active_color = color;
+}
+
 sf::Drawable* Input_Line::as_drawable() { return this; }
 
 sf::FloatRect Input_Line::get_component_render_bounds() { return body.getGlobalBounds(); }
@@ -35,9 +40,8 @@ Input_Line::Input_Line()
 	text_label.setFillColor(sf::Color::Black);
 	text_label.setString("");
 
-	text_area.setOutlineColor(sf::Color::Blue);
-	text_area.setFillColor(sf::Color::Transparent);
-	text_area.setOutlineThickness(2);
+	get_resource() = Application::system_fonts::MonaspaceNeon_Medium;
+	get_type_of_resource() = Resource_Manager::resource_type::font;
 
 	caret.setFillColor(sf::Color::Black);
 }
@@ -248,18 +252,7 @@ void Input_Line::update_resource(const std::variant<sf::Texture*, sf::Font*>& re
 void Input_Line::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(body,states);
-	target.draw(text_area, states);
 	target.draw(text_label, states);
-
-	sf::RectangleShape shape;
-	shape.setFillColor(sf::Color::Transparent);
-	shape.setOutlineColor(sf::Color::Red);
-	shape.setOutlineThickness(2);
-
-	shape.setSize(text_label.getGlobalBounds().size);
-	shape.setPosition(text_label.getGlobalBounds().position);
-
-	target.draw(shape, states);
 	target.draw(caret);
 }
 
@@ -275,14 +268,15 @@ void Input_Line::update(Core* the_core)
 				if (!is_active)
 				{
 					application.recent_keyboard_input = "";
-					body.setFillColor(sf::Color::White);
+					body_color_memory = body.getFillColor();
+					body.setFillColor(active_color);
 				}
 				is_active = true;
 
 			}
 			else 
 			{
-				body.setFillColor(SILVER);
+				body.setFillColor(body_color_memory);
 				is_active = false; 
 			}
 		}
