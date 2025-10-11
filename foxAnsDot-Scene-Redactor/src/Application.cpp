@@ -1,7 +1,7 @@
 #include "Application.h"
 
 //UI
-#include "UI/Button.h"
+#include "UI/Input_Line.h"
 #include "UI/Horizontal_Layout.h"
 #include "UI/Vertical_Layout.h"
 
@@ -77,6 +77,16 @@ Application::Application()
 	command_menu.set_min_heigth(50);
 	command_menu.body.setFillColor(sf::Color(85,97,120));
 
+	Input_Line line;
+	line.set_max_width(800);
+	line.set_max_heigth(50);
+
+	line.get_resource() = MonaspaceNeon_Medium;
+	line.get_type_of_resource() = Resource_Manager::resource_type::font;
+
+	command_menu.add_component(&line);
+	command_menu.set_align(Layout::align::center);
+
 	//scene components & properties
 	Vertical_Layout menu;
 	menu.body.setFillColor(sf::Color(42, 49, 59));
@@ -96,14 +106,18 @@ Application::Application()
 	//build scene
 	Core::lay_type layouts;
 	Core::lay_type layouts2;
+	Core::lay_type lay_of_ui_components;
 	layouts.emplace("main_Layout", &application_layout);
 	layouts2.emplace("command_menu", &command_menu);
 	layouts2.emplace("work_layout", &work_area);
 	layouts2.emplace("menu", &menu);
 
+	lay_of_ui_components.emplace("input_line", &line);
+
 
 	scene.push_back(layouts);
 	scene.push_back(layouts2);
+	scene.push_back(lay_of_ui_components);
 	this->run(800, 800, "Fox&Dot Scene Redactor", sf::State::Windowed);
 }
 
