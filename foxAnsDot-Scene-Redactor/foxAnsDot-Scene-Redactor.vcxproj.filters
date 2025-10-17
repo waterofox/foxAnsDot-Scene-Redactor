@@ -57,9 +57,6 @@
     <ClCompile Include="src\UI\scrollbar\Scrollbar.cpp">
       <Filter>UI\SCROLLBAR</Filter>
     </ClCompile>
-    <ClCompile Include="src\UI\scrollbar\Scrollbar_Element.cpp">
-      <Filter>UI\SCROLLBAR</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\UI\Label.h">
@@ -87,9 +84,6 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="src\UI\scrollbar\Scrollbar.h">
-      <Filter>UI\SCROLLBAR</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI\scrollbar\Scrollbar_Element.h">
       <Filter>UI\SCROLLBAR</Filter>
     </ClInclude>
   </ItemGroup>

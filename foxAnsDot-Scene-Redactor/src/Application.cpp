@@ -4,6 +4,7 @@
 #include "UI/Input_Line.h"
 #include "UI/Horizontal_Layout.h"
 #include "UI/Vertical_Layout.h"
+#include "UI/scrollbar/Scrollbar.h"
 
 void process_event_function(Core* the_core);
 void zaticka(Core* the_core, Scene_Component* component);
@@ -90,6 +91,15 @@ Application::Application()
 	//scene components & properties
 	Vertical_Layout menu;
 	menu.body.setFillColor(sf::Color(42, 49, 59));
+	
+	Scrollbar components;
+	components.set_max_heigth(400);
+	menu.add_component(&components);
+
+	components.get_type_of_resource() = Resource_Manager::resource_type::font;
+	components.get_resource() = MonaspaceNeon_Medium;
+
+
 
 	//scene
 	Horizontal_Layout scene_layout;
@@ -113,12 +123,13 @@ Application::Application()
 	layouts2.emplace("menu", &menu);
 
 	lay_of_ui_components.emplace("input_line", &line);
+	lay_of_ui_components.emplace("scene_components_bar", &components);
 
 
 	scene.push_back(layouts);
 	scene.push_back(layouts2);
 	scene.push_back(lay_of_ui_components);
-	this->run(800, 800, "Fox&Dot Scene Redactor", sf::State::Windowed);
+	this->run(800, 800, "foxAndDot Scene Redactor", sf::State::Windowed);
 }
 
 Application::~Application(){}

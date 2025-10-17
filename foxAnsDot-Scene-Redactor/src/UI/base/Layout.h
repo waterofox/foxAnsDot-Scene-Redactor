@@ -21,10 +21,10 @@ protected:
 	std::vector<UI_Component*>  members_vector; //порядок компонентов;
 	
 	virtual void layout_members() = 0;
-
+public:
 	//sdk update
 	void update(Core* the_core) override;
-
+protected:
 	//sdk
 	void on_intersection(Core* the_core, Scene_Component* component) override;
 	sf::Drawable* as_drawable() override;

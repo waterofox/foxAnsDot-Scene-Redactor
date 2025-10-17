@@ -16,10 +16,11 @@ private:
 protected:
 	void on_intersection(Core* the_core, Scene_Component* component) override;
 	sf::Drawable* as_drawable() override;
+
+public:
 	void update(Core* the_core) override;
 	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
 
-public:
 	sf::FloatRect get_component_render_bounds()  override;
 	sf::FloatRect get_component_bounds()		 override;
 
