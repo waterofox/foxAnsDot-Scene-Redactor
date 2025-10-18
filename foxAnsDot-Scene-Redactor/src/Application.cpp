@@ -67,6 +67,7 @@ Application::Application()
 	this->set_camera_mod(Core::camera_settings::static_camera);
 
 	//interface
+	/*
 	//main
 	Vertical_Layout application_layout;
 	application_layout.make_main();
@@ -129,6 +130,42 @@ Application::Application()
 	scene.push_back(layouts);
 	scene.push_back(layouts2);
 	scene.push_back(lay_of_ui_components);
+	*/
+	
+	Horizontal_Layout main_l;
+	main_l.make_main();
+	main_l.body.setFillColor(sf::Color::Magenta);
+
+	lay_type lay; lay.emplace("test", &main_l);
+
+
+	Vertical_Layout a; a.body.setFillColor(sf::Color::Green);
+	a.set_max_width(100);
+
+	Vertical_Layout b; b.body.setFillColor(sf::Color::Blue);
+	//b.set_min_width(100);
+
+	Vertical_Layout c; c.body.setFillColor(sf::Color::Red);
+	//c.set_max_width(100);
+
+	Vertical_Layout d; d.body.setFillColor(sf::Color::Cyan);
+	//d.set_max_width(100);
+
+	lay_type lay1; 
+	lay1.emplace("A", &a);
+	lay1.emplace("B", &b);
+	lay1.emplace("C", &c);
+	lay1.emplace("D", &d);
+
+	main_l.add_component(&a);
+	main_l.add_component(&b);
+	main_l.add_component(&c);
+	main_l.add_component(&d);
+
+
+	scene.push_back(lay);
+	scene.push_back(lay1);
+
 	this->run(800, 800, "foxAndDot Scene Redactor", sf::State::Windowed);
 }
 
