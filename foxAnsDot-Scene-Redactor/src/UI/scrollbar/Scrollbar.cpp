@@ -50,8 +50,13 @@ Scrollbar::Scrollbar()
 		this->handle_buttons(the_core, button);
 		});
 	
-	to_up->body.setOutlineThickness(-2);
-	to_down->body.setOutlineThickness(-2);
+	  to_up->body.setOutlineThickness(-2);
+	  to_down->body.setOutlineThickness(-2);
+
+	to_up->set_min_heigth(20);
+	to_down->set_min_heigth(20);
+	to_up->set_max_heigth(20);
+	to_down->set_max_heigth(20);
 	
 
 
@@ -59,6 +64,8 @@ Scrollbar::Scrollbar()
 	this->body.setFillColor(sf::Color(169, 169, 169));
 	this->body.setOutlineColor(sf::Color::Black);
 	this->body.setOutlineThickness(-3);
+
+	this->set_align(Layout::align::rigth);
 
 	//slider area
 	slider_area.body.setFillColor(sf::Color(128, 128, 128));
@@ -69,12 +76,15 @@ Scrollbar::Scrollbar()
 	bottom_section.set_align(align::bottom);
 	bottom_section.add_component(to_down);
 
+	slider_area.set_max_width(20);
+	slider_area.set_min_width(20);
+
 	slider_area.add_component(&top_section);
 	slider_area.add_component(&bottom_section);
 
 	//widget
-	this->add_component(&bar, 10);
-	this->add_component(&slider_area, 1);
+	this->add_component(&bar);
+	this->add_component(&slider_area);
 }
 
 void Scrollbar::set_ratio(const sf::Vector2i& new_ratio)

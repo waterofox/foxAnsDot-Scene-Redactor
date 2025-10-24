@@ -2,6 +2,10 @@
 #include "base/UI_Component.h"
 #include "Label.h"
 
+#define LIGHT_GREY sf::Color(211, 211, 211, 255)
+#define  DARK_GREY sf::Color(169, 169, 169, 255)
+#define  GAINSBORO sf::Color(220, 220, 220, 255)
+#define     SILVER sf::Color(192, 192, 192, 255)
 
 class Input_Line : public UI_Component
 {
@@ -19,7 +23,7 @@ private:
 
 	bool is_active = false;
 	//body view
-	sf::Color body_color_memory;
+	sf::Color body_color_memory = sf::Color(SILVER);
 	sf::Color active_color = sf::Color::White;
 	//text
 	std::string inputed_text = "";

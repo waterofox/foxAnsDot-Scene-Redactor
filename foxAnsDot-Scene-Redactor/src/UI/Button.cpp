@@ -14,14 +14,24 @@ sf::Drawable* Button::as_drawable()
 
 void Button::update(Core* the_core)
 {
+
 	//centering label
 	//------------------------------------------------------------------------------------------
 
-	sf::Vector2f label_size = button_label.getGlobalBounds().size;
-	button_label.setOrigin(label_size / 2.f);
+	text_area.setPosition(body.getGlobalBounds().position);
 
-	button_label.setPosition(body.getGlobalBounds().getCenter());
-	button_label.move(sf::Vector2f(0, -label_size.y / 4.f));
+	//text area position
+	text_area.setSize(sf::Vector2f(body.getSize().x - 10, button_label.label->getCharacterSize()));
+	text_area.setOrigin(sf::Vector2f(0, text_area.getSize().y / 2));
+	text_area.setPosition(body.getPosition());
+	text_area.move(sf::Vector2f((body.getSize().x - text_area.getSize().x) / 2, body.getSize().y / 2));
+	//text position
+	button_label.body.setPosition(text_area.getPosition());
+	button_label.body.move(sf::Vector2f(0, text_area.getSize().y / -2));
+
+	button_label.update(the_core);
+
+
 
 	//coloring
 	//------------------------------------------------------------------------------------------
@@ -46,6 +56,7 @@ void Button::update(Core* the_core)
 	}
 
 	//------------------------------------------------------------------------------------------
+
 }
 
 void Button::update_resource(const std::variant<sf::Texture*, sf::Font*>& resource)
@@ -80,8 +91,8 @@ Button::Button()
 	body.setOutlineThickness(5);
 
 	//label
-	button_label.setFillColor(sf::Color::Black);
-	button_label.setCharacterSize(18);
+	button_label.label->setFillColor(sf::Color::Black);
+	button_label.label->setCharacterSize(18);
 
 }
 
@@ -89,7 +100,7 @@ Button::Button(const std::string& button_text, Core::slot_type on_click) : Butto
 {
 	//resource
 	type_of_resource = Resource_Manager::resource_type::font; //for label
-	button_label.setString(button_text);
+	button_label.label->setString(button_text);
 
 	this->on_click = on_click;
 }

@@ -3,16 +3,19 @@
 
 void Layout::update(Core* the_core)
 {
+	APPLICATION
 	if (main_layout)
 	{
-		APPLICATION
 			body.setPosition(application.mapPixelToCoords(sf::Vector2i(0,0)));
 			sf::Vector2f newSize = sf::Vector2f(application.getSize());
 			
 			handle_new_size(newSize);
 			body.setSize(newSize);
 	}
-	layout_members();
+	if (application.resized)
+	{
+		layout_members();
+	}
 }
 
 void Layout::on_intersection(Core* the_core, Scene_Component* component) {}

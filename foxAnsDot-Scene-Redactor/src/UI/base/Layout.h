@@ -13,6 +13,7 @@ public:
 protected:
 	//general properties
 	bool main_layout = false;
+	bool body_changed = true;
 
 	//align
 	align layout_align = align::left;

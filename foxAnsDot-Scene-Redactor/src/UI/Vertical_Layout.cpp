@@ -7,6 +7,10 @@ void Vertical_Layout::layout_members()
 	sf::Vector2f new_component_size = sf::Vector2f(0, 0);
 	float full_members_heigth = 0;
 
+	bool resize_flag = false;
+
+	vertical_free_space = body.getSize().y;
+
 	for (int i = 0; i < members_vector.size(); ++i)
 	{
 		UI_Component*& component = members_vector[i];
@@ -16,15 +20,42 @@ void Vertical_Layout::layout_members()
 	one_part = body.getSize().y / float(parts);
 	for (int i = 0; i < members_vector.size(); ++i)
 	{
+		if (resize_flag)
+		{
+			parts = 0;
+
+			for (int j = i; j < members_vector.size(); ++j)
+			{
+				UI_Component*& component = members_vector[j];
+				parts += members[component];
+			}
+			one_part = vertical_free_space / float(parts);
+
+			resize_flag = false;
+		}
+
+
 		UI_Component*& component = members_vector[i];
 
 		new_component_size.x = body.getSize().x;
 		new_component_size.y = one_part * members[component];
 
-		component->handle_new_size(new_component_size);
-		component->body.setSize(new_component_size);
+		sf::Vector2f valid_size = new_component_size;
+		component->handle_new_size(valid_size);
+		component->body.setSize(valid_size);
+
+		if (valid_size.y > new_component_size.y)
+		{
+			resize_flag = true;
+
+		}
+		else if (valid_size.y < new_component_size.y)
+		{
+			resize_flag = true;
+		}
 
 		full_members_heigth += new_component_size.y;
+		vertical_free_space -= valid_size.y;
 	}
 
 	switch (this->layout_align)

@@ -20,6 +20,10 @@ public:
 	//on start
 	bool started = true;
 
+	//resized
+
+	bool resized = true;
+
 	//position on scene
 	sf::Vector2f viewPosition = sf::Vector2f(0, 0);
 

@@ -9,6 +9,7 @@ class Button : public UI_Component
 private:
 	bool is_active = false;
 
+	sf::RectangleShape text_area;
 	Label button_label;
 
 	Core::slot_type on_click = nullptr;

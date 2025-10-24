@@ -1,10 +1,6 @@
 #include "Input_Line.h"
 #include "../Application.h"
 
-#define LIGHT_GREY sf::Color(211, 211, 211, 255)
-#define  DARK_GREY sf::Color(169, 169, 169, 255)
-#define  GAINSBORO sf::Color(220, 220, 220, 255)
-#define     SILVER sf::Color(192, 192, 192, 255)
 
 const std::string& Input_Line::get_text()
 {
@@ -36,9 +32,9 @@ Input_Line::Input_Line()
 	body.setOutlineThickness(1);
 	body.setSize(sf::Vector2f(300, 28));
 
-	text_label.setCharacterSize(14);
-	text_label.setFillColor(sf::Color::Black);
-	text_label.setString("");
+	text_label.label->setCharacterSize(14);
+	text_label.label->setFillColor(sf::Color::Black);
+	text_label.label->setString("");
 
 	get_resource() = Application::system_fonts::MonaspaceNeon_Medium;
 	get_type_of_resource() = Resource_Manager::resource_type::font;
@@ -62,12 +58,12 @@ void Input_Line::handle_input_event(Core*& the_core)
 		++vcp;
 		++text_border.y;
 
-		text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
-		while (text_label.getGlobalBounds().size.x >= text_area.getSize().x)
+		text_label.label->setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+		while (text_label.label->getGlobalBounds().size.x >= text_area.getSize().x)
 		{
 			--vcp;
 			++text_border.x;
-			text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+			text_label.label->setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 		}
 
 		//clear data
@@ -82,12 +78,12 @@ void Input_Line::handle_input_event(Core*& the_core)
 		++vcp;
 		++text_border.y;
 
-		text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+		text_label.label->setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 
-		while (text_label.getGlobalBounds().size.x >= text_area.getSize().x)
+		while (text_label.label->getGlobalBounds().size.x >= text_area.getSize().x)
 		{
 
-			if (vcp == text_label.getString().getSize() - 1)
+			if (vcp == text_label.label->getString().getSize() - 1)
 			{
 				--vcp;
 				++text_border.x;
@@ -96,7 +92,7 @@ void Input_Line::handle_input_event(Core*& the_core)
 			{
 				--text_border.y;
 			}
-			text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+			text_label.label->setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 		}
 
 		//clear data
@@ -119,7 +115,7 @@ void Input_Line::handle_input_event(Core*& the_core)
 			{
 				--vcp;
 			}
-			text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+			text_label.label->setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 		}
 
 		//clear data
@@ -182,7 +178,7 @@ void Input_Line::handle_input_event(Core*& the_core)
 			}
 		}
 
-		text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+		text_label.label->setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 
 		//clear data
 		Application::clear_key(application, sf::Keyboard::Scancode::Backspace);
@@ -194,17 +190,17 @@ void Input_Line::handle_input_event(Core*& the_core)
 		{
 			++rcp;
 			++vcp;
-			if (vcp >= text_label.getString().getSize() and rcp != inputed_text.length())
+			if (vcp >= text_label.label->getString().getSize() and rcp != inputed_text.length())
 			{
 				++text_border.x;
 				++text_border.y;
 				--vcp;
-				text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
-				while (text_label.getGlobalBounds().size.x >= text_area.getSize().x)
+				text_label.label->setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+				while (text_label.label->getGlobalBounds().size.x >= text_area.getSize().x)
 				{
 					++text_border.x;
 					--vcp;
-					text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+					text_label.label->setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 				}
 			}
 		}
@@ -223,12 +219,12 @@ void Input_Line::handle_input_event(Core*& the_core)
 			{
 				--text_border.x;
 				++vcp;
-				text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+				text_label.label->setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 
-				while (text_label.getGlobalBounds().size.x >= text_area.getSize().x)
+				while (text_label.label->getGlobalBounds().size.x >= text_area.getSize().x)
 				{
 					--text_border.y;
-					text_label.setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
+					text_label.label->setString(inputed_text.substr(text_border.x, text_border.y - text_border.x + 1));
 				}
 			}
 		}
@@ -253,7 +249,10 @@ void Input_Line::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(body,states);
 	target.draw(text_label, states);
-	target.draw(caret);
+	if (visible_caret and is_active)
+	{
+		target.draw(caret);
+	}
 }
 
 void Input_Line::update(Core* the_core)
@@ -280,19 +279,19 @@ void Input_Line::update(Core* the_core)
 				is_active = false; 
 			}
 		}
-	
+
 	//text area position
-	text_area.setSize(sf::Vector2f(body.getSize().x - 10, text_label.getCharacterSize()));
+	text_area.setSize(sf::Vector2f(body.getSize().x - 10, text_label.label->getCharacterSize()));
 	text_area.setOrigin(sf::Vector2f(0, text_area.getSize().y / 2));
 	text_area.setPosition(body.getPosition());
 	text_area.move(sf::Vector2f((body.getSize().x - text_area.getSize().x) / 2, body.getSize().y / 2));
 	//text position
-	text_label.setPosition(text_area.getPosition());
-	text_label.move(sf::Vector2f(0, text_area.getSize().y / -2));
+	text_label.body.setPosition(text_area.getPosition());
+	text_label.body.move(sf::Vector2f(0, text_area.getSize().y / -2));
 	//caret positon
 	caret.setSize(sf::Vector2f(2, text_area.getSize().y));
 	caret.setOrigin(sf::Vector2f(0, caret.getSize().y / 2));
-	caret.setPosition(text_label.findCharacterPos(vcp));
+	caret.setPosition(text_label.label->findCharacterPos(vcp));
 	caret.move(sf::Vector2f(0, text_area.getSize().y / 2));
 
 		
@@ -326,9 +325,19 @@ void Input_Line::update(Core* the_core)
 			
 			handle_input_event(the_core);
 
+			caret_time += application.get_delta_time();
+			if (caret_time.asSeconds() >= 0.25) {
+				visible_caret = !visible_caret;
+				caret_time = sf::Time::Zero;
+			}
+
+
 		}
 
 
 		recent_input_event = unknown;
+
+		//update
+		text_label.update(the_core);
 }
 
