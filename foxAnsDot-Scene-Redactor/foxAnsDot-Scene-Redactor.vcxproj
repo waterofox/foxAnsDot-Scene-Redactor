@@ -137,25 +137,25 @@
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\UI\base\Layout.cpp" />
-    <ClCompile Include="src\UI\base\UI_Component.cpp" />
-    <ClCompile Include="src\UI\Button.cpp" />
-    <ClCompile Include="src\UI\Horizontal_Layout.cpp" />
-    <ClCompile Include="src\UI\Input_Line.cpp" />
-    <ClCompile Include="src\UI\Label.cpp" />
-    <ClCompile Include="src\UI\scrollbar\Scrollbar.cpp" />
-    <ClCompile Include="src\UI\Vertical_Layout.cpp" />
+    <ClCompile Include="src\UI\LAYOUT\base\Layout.cpp" />
+    <ClCompile Include="src\UI\LAYOUT\Horizontal_Layout.cpp" />
+    <ClCompile Include="src\UI\LAYOUT\Vertical_Layout.cpp" />
+    <ClCompile Include="src\UI\MANAGED\Button.cpp" />
+    <ClCompile Include="src\UI\MANAGED\Input_Line.cpp" />
+    <ClCompile Include="src\UI\MANAGED\Scrollbar.cpp" />
+    <ClCompile Include="src\UI\NON-MANAGED\Label.cpp" />
+    <ClCompile Include="src\UI\UI_Component.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\UI\base\Layout.h" />
-    <ClInclude Include="src\UI\base\UI_Component.h" />
-    <ClInclude Include="src\UI\Button.h" />
-    <ClInclude Include="src\UI\Horizontal_Layout.h" />
-    <ClInclude Include="src\UI\Input_Line.h" />
-    <ClInclude Include="src\UI\Label.h" />
-    <ClInclude Include="src\UI\scrollbar\Scrollbar.h" />
-    <ClInclude Include="src\UI\Vertical_Layout.h" />
+    <ClInclude Include="src\UI\LAYOUT\base\Layout.h" />
+    <ClInclude Include="src\UI\LAYOUT\Horizontal_Layout.h" />
+    <ClInclude Include="src\UI\LAYOUT\Vertical_Layout.h" />
+    <ClInclude Include="src\UI\MANAGED\Button.h" />
+    <ClInclude Include="src\UI\MANAGED\Input_Line.h" />
+    <ClInclude Include="src\UI\MANAGED\Scrollbar.h" />
+    <ClInclude Include="src\UI\NON-MANAGED\Label.h" />
+    <ClInclude Include="src\UI\UI_Component.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="src\resources\fonts\Monaspace Neon\MonaspaceNeon-Medium.otf" />

@@ -19,11 +19,17 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="UI base">
-      <UniqueIdentifier>{74bcdbd7-f73b-4eda-99ee-cbdf70914e03}</UniqueIdentifier>
+    <Filter Include="UI\MANAGED">
+      <UniqueIdentifier>{f306bd94-4fe2-4656-9f20-56122d0df549}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\SCROLLBAR">
-      <UniqueIdentifier>{04021381-5fab-45a9-a9b1-a6998c0f8e9c}</UniqueIdentifier>
+    <Filter Include="UI\NON-MANAGED">
+      <UniqueIdentifier>{79e9d4ef-9546-46f6-a168-f586575a1730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\LAYOUT">
+      <UniqueIdentifier>{d2efc014-e875-45c2-9322-987da4b016b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\LAYOUT\base">
+      <UniqueIdentifier>{37e63797-5358-49e0-beb0-aa92bcee39ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,58 +39,58 @@
     <ClCompile Include="src\Application.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\UI\Label.cpp">
+    <ClCompile Include="src\UI\MANAGED\Button.cpp">
+      <Filter>UI\MANAGED</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\MANAGED\Input_Line.cpp">
+      <Filter>UI\MANAGED</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\MANAGED\Scrollbar.cpp">
+      <Filter>UI\MANAGED</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\LAYOUT\Horizontal_Layout.cpp">
+      <Filter>UI\LAYOUT</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\LAYOUT\Vertical_Layout.cpp">
+      <Filter>UI\LAYOUT</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\LAYOUT\base\Layout.cpp">
+      <Filter>UI\LAYOUT\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\NON-MANAGED\Label.cpp">
+      <Filter>UI\NON-MANAGED</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\UI_Component.cpp">
       <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\Input_Line.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\Horizontal_Layout.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\base\Layout.cpp">
-      <Filter>UI base</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\base\UI_Component.cpp">
-      <Filter>UI base</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\Vertical_Layout.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\scrollbar\Scrollbar.cpp">
-      <Filter>UI\SCROLLBAR</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\UI\Label.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI\Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI\Input_Line.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="src\Application.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\UI\Horizontal_Layout.h">
+    <ClInclude Include="src\UI\MANAGED\Button.h">
+      <Filter>UI\MANAGED</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\MANAGED\Input_Line.h">
+      <Filter>UI\MANAGED</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\MANAGED\Scrollbar.h">
+      <Filter>UI\MANAGED</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\LAYOUT\Horizontal_Layout.h">
+      <Filter>UI\LAYOUT</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\LAYOUT\Vertical_Layout.h">
+      <Filter>UI\LAYOUT</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\LAYOUT\base\Layout.h">
+      <Filter>UI\LAYOUT\base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\NON-MANAGED\Label.h">
+      <Filter>UI\NON-MANAGED</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\UI_Component.h">
       <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI\base\Layout.h">
-      <Filter>UI base</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI\base\UI_Component.h">
-      <Filter>UI base</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI\Vertical_Layout.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI\scrollbar\Scrollbar.h">
-      <Filter>UI\SCROLLBAR</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

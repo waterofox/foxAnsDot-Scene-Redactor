@@ -1,7 +1,7 @@
 #pragma once
-#include "../Horizontal_Layout.h"
-#include "../Vertical_Layout.h"
-#include "../Button.h"
+#include "../LAYOUT/Horizontal_Layout.h"
+#include "../LAYOUT/Vertical_Layout.h"
+#include "../MANAGED/Button.h"
 #include <map>
 
 class Scrollbar : public Horizontal_Layout

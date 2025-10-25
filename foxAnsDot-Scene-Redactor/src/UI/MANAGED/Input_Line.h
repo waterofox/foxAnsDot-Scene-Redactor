@@ -1,6 +1,6 @@
 #pragma once
-#include "base/UI_Component.h"
-#include "Label.h"
+#include "../UI_Component.h"
+#include "../NON-MANAGED/Label.h"
 
 #define LIGHT_GREY sf::Color(211, 211, 211, 255)
 #define  DARK_GREY sf::Color(169, 169, 169, 255)

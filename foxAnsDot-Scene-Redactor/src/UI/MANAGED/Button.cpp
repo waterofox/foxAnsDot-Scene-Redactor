@@ -1,5 +1,5 @@
 #include "Button.h"
-#include "../Application.h";
+#include "../../Application.h";
 
 #define LIGHT_GREY sf::Color(211, 211, 211, 255)
 #define  DARK_GREY sf::Color(169, 169, 169, 255)
@@ -16,12 +16,10 @@ void Button::update(Core* the_core)
 {
 
 	//centering label
-	//------------------------------------------------------------------------------------------
-
-	text_area.setPosition(body.getGlobalBounds().position);
+	//-----------------------------------------------------------------------------------------
 
 	//text area position
-	text_area.setSize(sf::Vector2f(body.getSize().x - 10, button_label.label->getCharacterSize()));
+	text_area.setSize(sf::Vector2f(button_label.label->getGlobalBounds().size.x, button_label.label->getCharacterSize()));
 	text_area.setOrigin(sf::Vector2f(0, text_area.getSize().y / 2));
 	text_area.setPosition(body.getPosition());
 	text_area.move(sf::Vector2f((body.getSize().x - text_area.getSize().x) / 2, body.getSize().y / 2));
@@ -110,5 +108,4 @@ Button::~Button() {}
 Label& Button::get_label()
 {
 	return button_label;
-	//Визулка хуйню творит
 }

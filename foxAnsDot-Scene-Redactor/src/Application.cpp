@@ -1,10 +1,10 @@
 #include "Application.h"
 
 //UI
-#include "UI/Input_Line.h"
-#include "UI/Horizontal_Layout.h"
-#include "UI/Vertical_Layout.h"
-#include "UI/scrollbar/Scrollbar.h"
+#include "UI/MANAGED/Input_Line.h"
+#include "UI/LAYOUT/Horizontal_Layout.h"
+#include "UI/LAYOUT/Vertical_Layout.h"
+#include "UI/MANAGED/Scrollbar.h"
 
 void process_event_function(Core* the_core);
 void zaticka(Core* the_core, Scene_Component* component);

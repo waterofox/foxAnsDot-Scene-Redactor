@@ -53,10 +53,10 @@ Scrollbar::Scrollbar()
 	  to_up->body.setOutlineThickness(-2);
 	  to_down->body.setOutlineThickness(-2);
 
-	to_up->set_min_heigth(20);
-	to_down->set_min_heigth(20);
-	to_up->set_max_heigth(20);
-	to_down->set_max_heigth(20);
+	to_up->set_min_heigth(2560/75);
+	to_down->set_min_heigth(2560/75);
+	to_up->set_max_heigth(2560/75);
+	to_down->set_max_heigth(2560/75);
 	
 
 
@@ -76,8 +76,8 @@ Scrollbar::Scrollbar()
 	bottom_section.set_align(align::bottom);
 	bottom_section.add_component(to_down);
 
-	slider_area.set_max_width(20);
-	slider_area.set_min_width(20);
+	slider_area.set_max_width(2560/75);
+	slider_area.set_min_width(2560/75);
 
 	slider_area.add_component(&top_section);
 	slider_area.add_component(&bottom_section);

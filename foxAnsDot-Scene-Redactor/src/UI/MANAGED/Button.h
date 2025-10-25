@@ -1,6 +1,6 @@
 #pragma once
-#include "base/UI_Component.h"
-#include "Label.h"
+#include "../UI_Component.h"
+#include "../NON-MANAGED/Label.h"
 
 class Application;
 

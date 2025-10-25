@@ -1,7 +1,7 @@
 #pragma once
 
 #include <map>
-#include "UI_Component.h"
+#include "../../UI_Component.h"
 
 class Layout : public UI_Component
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include <foxAndDot-SDK/Core.h>
-#include "base/UI_Component.h"
+#include "../UI_Component.h"
 
 
 class Label : public UI_Component
