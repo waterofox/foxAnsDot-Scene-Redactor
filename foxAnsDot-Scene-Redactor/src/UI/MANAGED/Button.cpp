@@ -1,9 +1,6 @@
 #include "Button.h"
 #include "../../Application.h";
 
-#define LIGHT_GREY sf::Color(211, 211, 211, 255)
-#define  DARK_GREY sf::Color(169, 169, 169, 255)
-#define  GAINSBORO sf::Color(220, 220, 220, 255)
 
 void Button::on_intersection(Core* the_core, Scene_Component* component) {}
 
@@ -37,9 +34,9 @@ void Button::update(Core* the_core)
 	sf::Vector2f cursor = the_core->mapPixelToCoords(sf::Mouse::getPosition(*the_core));
 	if (body.getGlobalBounds().contains(cursor))
 	{
-		if (body.getFillColor() != DARK_GREY) { body.setFillColor(sf::Color::White); }
+		if (body.getFillColor() != active_color) { body.setFillColor(hovered_color); }
 	}
-	else { body.setFillColor(LIGHT_GREY); }
+	else { body.setFillColor(base_color); }
 
 	//click handling
 	//------------------------------------------------------------------------------------------
@@ -50,7 +47,7 @@ void Button::update(Core* the_core)
 	if (body.getGlobalBounds().contains(application.mapPixelToCoords(recent_click.position)))
 	{
 		if (on_click != nullptr) { on_click(the_core, this); }
-		body.setFillColor(DARK_GREY);
+		body.setFillColor(active_color);
 	}
 
 	//------------------------------------------------------------------------------------------

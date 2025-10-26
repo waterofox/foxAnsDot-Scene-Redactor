@@ -4,7 +4,7 @@
 
 class Application;
 
-class Button : public UI_Component
+class Button : public UI_Component, public Clickable
 {
 private:
 	bool is_active = false;

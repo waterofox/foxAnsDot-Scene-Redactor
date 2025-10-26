@@ -26,7 +26,7 @@ Input_Line::Input_Line()
 {
 	is_active = false;
 
-	body.setFillColor(SILVER);
+	body.setFillColor(base_color);
 	body.setOutlineColor(sf::Color::Black);
 
 	body.setOutlineThickness(1);
@@ -267,7 +267,6 @@ void Input_Line::update(Core* the_core)
 				if (!is_active)
 				{
 					application.recent_keyboard_input = "";
-					body_color_memory = body.getFillColor();
 					body.setFillColor(active_color);
 				}
 				is_active = true;
@@ -275,7 +274,7 @@ void Input_Line::update(Core* the_core)
 			}
 			else 
 			{
-				body.setFillColor(body_color_memory);
+				body.setFillColor(base_color);
 				is_active = false; 
 			}
 		}

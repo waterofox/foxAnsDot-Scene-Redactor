@@ -46,9 +46,11 @@ Scrollbar::Scrollbar()
 	to_up = new Button("-", [this](Core* the_core, Scene_Component* button) {
 		this->handle_buttons(the_core, button);
 		});
+	to_up->hovered_color = sf::Color::White;
 	to_down = new Button("+", [this](Core* the_core, Scene_Component* button) {
 		this->handle_buttons(the_core, button);
 		});
+	to_down->hovered_color = sf::Color::White;
 	
 	  to_up->body.setOutlineThickness(-2);
 	  to_down->body.setOutlineThickness(-2);
