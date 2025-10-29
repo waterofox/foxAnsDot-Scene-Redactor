@@ -1,9 +1,10 @@
 #include "Application.h"
 
 //UI
-#include "UI/Input_Line.h"
-#include "UI/Horizontal_Layout.h"
-#include "UI/Vertical_Layout.h"
+#include "UI/MANAGED/Input_Line.h"
+#include "UI/LAYOUT/Horizontal_Layout.h"
+#include "UI/LAYOUT/Vertical_Layout.h"
+#include "UI/MANAGED/Scrollbar.h"
 
 void process_event_function(Core* the_core);
 void zaticka(Core* the_core, Scene_Component* component);
@@ -54,6 +55,7 @@ void Application::run(const unsigned int& window_width, const unsigned int& wind
 
 Application::Application()
 {
+	parse_config();
 	//application
 	this->set_process_events_function(process_event_function);
 	init_resources();
@@ -66,6 +68,7 @@ Application::Application()
 	this->set_camera_mod(Core::camera_settings::static_camera);
 
 	//interface
+	
 	//main
 	Vertical_Layout application_layout;
 	application_layout.make_main();
@@ -81,6 +84,8 @@ Application::Application()
 	line.set_max_width(800);
 	line.set_max_heigth(50);
 
+	line.body.setFillColor(sf::Color::Yellow);
+
 	line.get_resource() = MonaspaceNeon_Medium;
 	line.get_type_of_resource() = Resource_Manager::resource_type::font;
 
@@ -90,6 +95,15 @@ Application::Application()
 	//scene components & properties
 	Vertical_Layout menu;
 	menu.body.setFillColor(sf::Color(42, 49, 59));
+	
+	Scrollbar components;
+	components.set_max_heigth(400);
+	menu.add_component(&components);
+
+	components.get_type_of_resource() = Resource_Manager::resource_type::font;
+	components.get_resource() = MonaspaceNeon_Medium;
+
+
 
 	//scene
 	Horizontal_Layout scene_layout;
@@ -113,12 +127,15 @@ Application::Application()
 	layouts2.emplace("menu", &menu);
 
 	lay_of_ui_components.emplace("input_line", &line);
+	lay_of_ui_components.emplace("scene_components_bar", &components);
 
 
 	scene.push_back(layouts);
 	scene.push_back(layouts2);
 	scene.push_back(lay_of_ui_components);
-	this->run(800, 800, "Fox&Dot Scene Redactor", sf::State::Windowed);
+	
+
+	this->run(800, 800, "foxAndDot Scene Redactor", sf::State::Windowed);
 }
 
 Application::~Application(){}
@@ -131,6 +148,22 @@ void Application::clear_pressed_fields()
 	recent_keyboard_input = "";
 }
 
+void Application::parse_config()
+{
+	std::ifstream config(config_path);
+	if (!config.is_open())
+	{
+		std::cout << "NO CONFIG FILE\n";
+		return;
+	}
+
+	std::string buffer;
+	config >> buffer; //DISPLAY
+	config >> buffer >> this->config.display_heigth;
+	config >> buffer >> this->config.display_width;
+
+}
+
 
 void process_event_function(Core* the_core)
 {
@@ -138,6 +171,11 @@ void process_event_function(Core* the_core)
 	APPLICATION
 
 		application.clear_pressed_fields();
+
+	if (!application.started)
+	{
+		application.resized = false;
+	}
 
 	//ON CLOSE
 	const auto onClose = [&application](const sf::Event::Closed&) 
@@ -176,6 +214,8 @@ void process_event_function(Core* the_core)
 		sf::View& camera = application.get_camera();
 
 		camera.setSize(sf::Vector2f(evnt.size.x, evnt.size.y));
+		
+		application.resized = true;
 		
 		/*
 		sf::View& camera = application.get_camera();
