@@ -1,4 +1,5 @@
 ﻿#include "Scrollbar.h"
+#include "../../Application.h"
 
 void Scrollbar::handle_buttons(Core* the_core, Scene_Component* button)
 {
@@ -7,6 +8,10 @@ void Scrollbar::handle_buttons(Core* the_core, Scene_Component* button)
 
 void Scrollbar::update(Core* the_core)
 {
+	APPLICATION
+
+	slider_area.set_min_width(application.config.display_width / 75);
+	slider_area.set_max_width(application.config.display_width / 75);
 
 	Horizontal_Layout::update(the_core);
 

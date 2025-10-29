@@ -58,6 +58,4 @@ public:
 
 	const std::string&  get_text();
 	const bool& is_active_now();
-
-	void set_active_color(const sf::Color& color);
 };

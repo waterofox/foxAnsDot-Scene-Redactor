@@ -55,6 +55,7 @@ void Application::run(const unsigned int& window_width, const unsigned int& wind
 
 Application::Application()
 {
+	parse_config();
 	//application
 	this->set_process_events_function(process_event_function);
 	init_resources();
@@ -145,6 +146,22 @@ void Application::clear_pressed_fields()
 	recent_mous_pressed_evnt.position = sf::Vector2i(-1, -1);
 
 	recent_keyboard_input = "";
+}
+
+void Application::parse_config()
+{
+	std::ifstream config(config_path);
+	if (!config.is_open())
+	{
+		std::cout << "NO CONFIG FILE\n";
+		return;
+	}
+
+	std::string buffer;
+	config >> buffer; //DISPLAY
+	config >> buffer >> this->config.display_heigth;
+	config >> buffer >> this->config.display_width;
+
 }
 
 

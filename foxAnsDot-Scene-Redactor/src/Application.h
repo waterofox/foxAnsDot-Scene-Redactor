@@ -1,6 +1,10 @@
 #pragma once
+#include <fstream>
 //SDK
 #include <foxAndDot-SDK/Core.h>
+
+
+#define config_path "config/config.txt"
 
 #define APPLICATION 	Application* casted_application = static_cast<Application*>(the_core); \
 						Application& application = (*casted_application);
@@ -12,8 +16,14 @@
 
 class Application : public Core
 {
-
+	struct parsed_config
+	{
+		unsigned int display_heigth;
+		unsigned int display_width;
+	};
 public:
+
+	parsed_config config;
 
 	static void clear_key(Application&,const sf::Keyboard::Scancode& scancode);
 
@@ -51,6 +61,7 @@ public:
 //---------------------------------------------------------------
 private:
 	void run(const unsigned int& window_width, const unsigned int& window_height, const std::string& title, const sf::State& state);
+	void parse_config();
 public:
 	Application();
 	~Application();

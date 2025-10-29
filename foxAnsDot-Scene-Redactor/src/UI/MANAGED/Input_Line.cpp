@@ -12,11 +12,6 @@ const bool& Input_Line::is_active_now()
 	return is_active;
 }
 
-void Input_Line::set_active_color(const sf::Color& color)
-{
-	active_color = color;
-}
-
 sf::Drawable* Input_Line::as_drawable() { return this; }
 
 sf::FloatRect Input_Line::get_component_render_bounds() { return body.getGlobalBounds(); }
