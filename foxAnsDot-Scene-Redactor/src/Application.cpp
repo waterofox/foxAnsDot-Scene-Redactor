@@ -97,6 +97,22 @@ Application::Application()
 	menu.body.setFillColor(sf::Color(42, 49, 59));
 	
 	Scrollbar components;
+
+	Horizontal_Layout a; a.body.setFillColor(sf::Color::Green); a.body.setOutlineThickness(-1); a.body.setOutlineColor(sf::Color::Black);
+	Horizontal_Layout b; b.body.setFillColor(sf::Color::Blue); b.body.setOutlineThickness(-1); b.body.setOutlineColor(sf::Color::Black);
+	Horizontal_Layout c; c.body.setFillColor(sf::Color::Cyan); c.body.setOutlineThickness(-1); c.body.setOutlineColor(sf::Color::Black);
+	Horizontal_Layout d; d.body.setFillColor(sf::Color::Yellow); d.body.setOutlineThickness(-1); d.body.setOutlineColor(sf::Color::Black);
+	Horizontal_Layout e; e.body.setFillColor(sf::Color::White); e.body.setOutlineThickness(-1); e.body.setOutlineColor(sf::Color::Black);
+	Horizontal_Layout f; f.body.setFillColor(sf::Color::Magenta); f.body.setOutlineThickness(-1); f.body.setOutlineColor(sf::Color::Black);
+
+	components.set_showed_elements_count(3);
+	components.add_element(&a);
+	components.add_element(&b);
+	components.add_element(&c);
+	components.add_element(&d);
+	components.add_element(&e);
+	components.add_element(&f);
+
 	components.set_max_heigth(400);
 	menu.add_component(&components);
 
@@ -121,6 +137,7 @@ Application::Application()
 	Core::lay_type layouts;
 	Core::lay_type layouts2;
 	Core::lay_type lay_of_ui_components;
+	Core::lay_type bar_components;
 	layouts.emplace("main_Layout", &application_layout);
 	layouts2.emplace("command_menu", &command_menu);
 	layouts2.emplace("work_layout", &work_area);
@@ -129,10 +146,18 @@ Application::Application()
 	lay_of_ui_components.emplace("input_line", &line);
 	lay_of_ui_components.emplace("scene_components_bar", &components);
 
+	bar_components.emplace("a", &a);
+	bar_components.emplace("b", &b);
+	bar_components.emplace("c", &c);
+	bar_components.emplace("d", &d);
+	bar_components.emplace("e", &e);
+	bar_components.emplace("f", &f);
+
 
 	scene.push_back(layouts);
 	scene.push_back(layouts2);
 	scene.push_back(lay_of_ui_components);
+	scene.push_back(bar_components);
 	
 
 	this->run(800, 800, "foxAndDot Scene Redactor", sf::State::Windowed);

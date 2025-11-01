@@ -3,7 +3,18 @@
 
 void Scrollbar::handle_buttons(Core* the_core, Scene_Component* button)
 {
-	std::cout << "some code\n";
+	if (button->name() == "UP")
+	{
+		--top_border;
+		if (top_border < 0) { top_border = 0; return; }
+
+	}
+	else
+	{
+		++top_border;
+		if (top_border + (showed_members_count - 1) > bar_members.size()) { --top_border; return; }
+	}
+	is_scrolled = true;
 }
 
 void Scrollbar::update(Core* the_core)
@@ -13,6 +24,40 @@ void Scrollbar::update(Core* the_core)
 	slider_area.set_min_width(application.config.display_width / 75);
 	slider_area.set_max_width(application.config.display_width / 75);
 
+	to_up->set_min_heigth(application.config.display_width / 75);
+	to_up->set_max_heigth(application.config.display_width / 75);
+
+	to_down->set_min_heigth(application.config.display_width / 75);
+	to_down->set_max_heigth(application.config.display_width / 75);
+
+	if (is_scrolled)
+	{
+		for (int i = 0; i < bar_members.size(); ++i)
+		{
+			bar.remove_component(bar_members[i]);
+		}
+		is_scrolled = false;
+	}
+
+	for (int i = 0; i < bar_members.size(); ++i)
+	{
+		bar_members[i]->set_max_heigth(body.getSize().y / float(showed_members_count));
+		//возможно потребуется ограниченеи и минимальной высоты
+		if (i >= top_border and i < top_border + showed_members_count) 
+		{
+			bar.add_component(bar_members[i]);
+			bar_members[i]->set_visble(true);
+			bar_members[i]->set_updateble(true);
+		}
+		else
+		{
+			bar.remove_component(bar_members[i]);
+			bar_members[i]->set_visble(false);
+			bar_members[i]->set_updateble(false);
+		}
+	}
+	
+	
 	Horizontal_Layout::update(the_core);
 
 	to_up->update(the_core);
@@ -48,6 +93,7 @@ void Scrollbar::update_resource(const std::variant<sf::Texture*, sf::Font*>& res
 Scrollbar::Scrollbar()
 {
 	//buttons 
+
 	to_up = new Button("-", [this](Core* the_core, Scene_Component* button) {
 		this->handle_buttons(the_core, button);
 		});
@@ -57,6 +103,9 @@ Scrollbar::Scrollbar()
 		});
 	to_down->hovered_color = sf::Color::White;
 	
+	to_up->name() = "UP";
+	to_down->name() = "DOWN";
+
 	  to_up->body.setOutlineThickness(-2);
 	  to_down->body.setOutlineThickness(-2);
 
@@ -94,14 +143,20 @@ Scrollbar::Scrollbar()
 	this->add_component(&slider_area);
 }
 
-void Scrollbar::set_ratio(const sf::Vector2i& new_ratio)
+void Scrollbar::set_showed_elements_count(const int& arg)
 {
+	this->showed_members_count = arg;
 }
 
-void Scrollbar::add_element(const Layout*& new_component)
+void Scrollbar::add_element(UI_Component* new_component)
 {
+	bar_members.push_back(new_component);
 }
 
-void Scrollbar::remove_element(const Layout*& component)
+void Scrollbar::remove_element(UI_Component* component)
 {
+	for (int i = 0; i < bar_members.size(); ++i)
+	{
+		if (bar_members[i] == component) { bar_members.erase(bar_members.begin() + i);  break; }
+	}
 }

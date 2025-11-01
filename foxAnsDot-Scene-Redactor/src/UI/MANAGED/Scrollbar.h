@@ -6,10 +6,18 @@
 
 class Scrollbar : public Horizontal_Layout
 {
-	
+	//bar	
+	Vertical_Layout bar;
+
+	int showed_members_count = 0;
+	std::vector<UI_Component*> bar_members;
+
 	//scroll
 	Button* to_up = nullptr;
 	Button* to_down = nullptr;
+	bool is_scrolled = false;
+
+	int top_border = 0;
 
 	void handle_buttons(Core* the_core, Scene_Component* button);
 
@@ -18,9 +26,6 @@ class Scrollbar : public Horizontal_Layout
 
 	Horizontal_Layout top_section;
 	Horizontal_Layout bottom_section;
-	//bar	
-	Vertical_Layout bar;
-	sf::Vector2i  ratio;
 
 	//OVERRIDED
 	void update(Core* the_core) override;
@@ -31,9 +36,9 @@ public:
 
 	Scrollbar();
 	
-	void set_ratio(const sf::Vector2i& new_ratio);
-	void add_element(const Layout*& new_component);
-	void remove_element(const Layout*& component);
+	void set_showed_elements_count(const int& arg);
+	void add_element(UI_Component* new_component);
+	void remove_element(UI_Component* component);
 
 };
 

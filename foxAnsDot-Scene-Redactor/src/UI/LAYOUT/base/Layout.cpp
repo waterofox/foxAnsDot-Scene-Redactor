@@ -49,14 +49,21 @@ Layout::Layout()
 
 void Layout::add_component(UI_Component* component_ptr)
 {
+	if (members.find(component_ptr) == members.end())
+	{
+		members_vector.push_back(component_ptr);
+	}
 	members[component_ptr] = 1;
-	members_vector.push_back(component_ptr);
 }
 
 void Layout::add_component(UI_Component* component_ptr, const int& ratio)
 {
+	if (members.find(component_ptr) == members.end())
+	{
+		members_vector.push_back(component_ptr);
+	}
+
 	members[component_ptr] = ratio;
-	members_vector.push_back(component_ptr);
 }
 
 void Layout::set_component_ratio(UI_Component* component_ptr, const int& ratio)
