@@ -25,7 +25,9 @@ private:
 
 	//text view
 	sf::RectangleShape text_area;
+public:
 	Label text_label;
+private:
 	sf::Vector2i text_border = sf::Vector2i(0, 0);
 
 	//process
@@ -33,7 +35,9 @@ private:
 	void handle_input_event(Core*& the_core);
 
 	//caret
+public:
 	sf::RectangleShape caret;
+private:
 	sf::Time caret_time = sf::Time::Zero;
 	bool visible_caret = false;
 
@@ -42,8 +46,6 @@ private:
 	
 	void on_intersection(Core* the_core, Scene_Component* component) override;
 	sf::Drawable* as_drawable() override;
-	void update(Core* the_core) override;
-	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource)	override;
 
 	sf::FloatRect get_component_render_bounds() override;
 	sf::FloatRect get_component_bounds() override;
@@ -53,6 +55,10 @@ private:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 public:
+
+	void update(Core* the_core) override;
+	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource)	override;
+
 	Input_Line();
 	~Input_Line();
 

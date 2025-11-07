@@ -43,6 +43,10 @@ public:
 	{
 		MonaspaceNeon_Medium
 	};
+	enum system_icons
+	{
+		scene_component_icon
+	};
 private:
 	void init_resources();
 public:

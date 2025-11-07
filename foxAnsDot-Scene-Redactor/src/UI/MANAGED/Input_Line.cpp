@@ -252,6 +252,10 @@ void Input_Line::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Input_Line::update(Core* the_core)
 {
+	if (!is_active)
+	{
+		body.setFillColor(base_color);
+	}
 	APPLICATION
 
 		if (application.recent_mous_pressed_evnt.position.x != -1)

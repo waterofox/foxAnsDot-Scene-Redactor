@@ -12,7 +12,7 @@ void Scrollbar::handle_buttons(Core* the_core, Scene_Component* button)
 	else
 	{
 		++top_border;
-		if (top_border + (showed_members_count - 1) > bar_members.size()) { --top_border; return; }
+		if (top_border + (showed_members_count) > bar_members.size()) { --top_border; return; }
 	}
 	is_scrolled = true;
 }
@@ -21,6 +21,7 @@ void Scrollbar::update(Core* the_core)
 {
 	APPLICATION
 
+		//RESIZING MANAGED COMPONENTS
 	slider_area.set_min_width(application.config.display_width / 75);
 	slider_area.set_max_width(application.config.display_width / 75);
 
@@ -30,6 +31,8 @@ void Scrollbar::update(Core* the_core)
 	to_down->set_min_heigth(application.config.display_width / 75);
 	to_down->set_max_heigth(application.config.display_width / 75);
 
+
+	//HANDLE SCROLL
 	if (is_scrolled)
 	{
 		for (int i = 0; i < bar_members.size(); ++i)
@@ -42,7 +45,6 @@ void Scrollbar::update(Core* the_core)
 	for (int i = 0; i < bar_members.size(); ++i)
 	{
 		bar_members[i]->set_max_heigth(body.getSize().y / float(showed_members_count));
-		//возможно потребуется ограниченеи и минимальной высоты
 		if (i >= top_border and i < top_border + showed_members_count) 
 		{
 			bar.add_component(bar_members[i]);
@@ -57,8 +59,20 @@ void Scrollbar::update(Core* the_core)
 		}
 	}
 	
-	
+	//UPDATE WIDGET
 	Horizontal_Layout::update(the_core);
+
+	//SLIDER VIEW
+
+	float slider_heigth = (slider_area.body.getSize().y - 2 * application.config.display_width / 75) / bar_members.size() * showed_members_count;
+
+	slider.setSize(sf::Vector2f(slider_area.body.getSize().x, slider_heigth));
+
+	slider.setPosition(slider_area.body.getPosition());
+	slider.move(sf::Vector2f(0, (application.config.display_width / 75) + top_border * ((slider_area.body.getSize().y - 2 * application.config.display_width / 75) / bar_members.size())));
+
+
+	//UPDATE
 
 	to_up->update(the_core);
 	to_down->update(the_core);
@@ -71,6 +85,9 @@ void Scrollbar::update(Core* the_core)
 	to_up->set_max_heigth(top_section.body.getSize().x);
 	to_down->set_max_heigth(bottom_section.body.getSize().x);
 
+	
+
+
 	bar.update(the_core);
 
 	
@@ -82,6 +99,7 @@ void Scrollbar::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(slider_area.body,states);
 	target.draw(*to_up, states);
 	target.draw(*to_down, states);
+	target.draw(slider, states);
 }
 
 void Scrollbar::update_resource(const std::variant<sf::Texture*, sf::Font*>& resource)
@@ -141,6 +159,8 @@ Scrollbar::Scrollbar()
 	//widget
 	this->add_component(&bar);
 	this->add_component(&slider_area);
+
+	slider.setFillColor(sf::Color(56,56,56));
 }
 
 void Scrollbar::set_showed_elements_count(const int& arg)

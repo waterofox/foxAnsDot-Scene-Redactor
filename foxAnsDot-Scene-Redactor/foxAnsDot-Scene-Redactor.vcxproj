@@ -138,23 +138,27 @@
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\SceneRedactor-UI\Com_Bar_Element.cpp" />
     <ClCompile Include="src\UI\LAYOUT\base\Layout.cpp" />
     <ClCompile Include="src\UI\LAYOUT\Horizontal_Layout.cpp" />
     <ClCompile Include="src\UI\LAYOUT\Vertical_Layout.cpp" />
     <ClCompile Include="src\UI\MANAGED\Button.cpp" />
     <ClCompile Include="src\UI\MANAGED\Input_Line.cpp" />
     <ClCompile Include="src\UI\MANAGED\Scrollbar.cpp" />
+    <ClCompile Include="src\UI\NON-MANAGED\Icon.cpp" />
     <ClCompile Include="src\UI\NON-MANAGED\Label.cpp" />
     <ClCompile Include="src\UI\UI_Component.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\SceneRedactor-UI\Com_Bar_Element.h" />
     <ClInclude Include="src\UI\LAYOUT\base\Layout.h" />
     <ClInclude Include="src\UI\LAYOUT\Horizontal_Layout.h" />
     <ClInclude Include="src\UI\LAYOUT\Vertical_Layout.h" />
     <ClInclude Include="src\UI\MANAGED\Button.h" />
     <ClInclude Include="src\UI\MANAGED\Input_Line.h" />
     <ClInclude Include="src\UI\MANAGED\Scrollbar.h" />
+    <ClInclude Include="src\UI\NON-MANAGED\Icon.h" />
     <ClInclude Include="src\UI\NON-MANAGED\Label.h" />
     <ClInclude Include="src\UI\UI_Component.h" />
   </ItemGroup>

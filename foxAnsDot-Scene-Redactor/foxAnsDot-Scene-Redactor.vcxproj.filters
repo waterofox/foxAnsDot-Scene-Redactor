@@ -31,6 +31,9 @@
     <Filter Include="UI\LAYOUT\base">
       <UniqueIdentifier>{37e63797-5358-49e0-beb0-aa92bcee39ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneRedactor">
+      <UniqueIdentifier>{51ab4638-1fb4-4ac1-965e-e5d734d2543b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -63,6 +66,12 @@
     <ClCompile Include="src\UI\UI_Component.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\SceneRedactor-UI\Com_Bar_Element.cpp">
+      <Filter>SceneRedactor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\NON-MANAGED\Icon.cpp">
+      <Filter>UI\NON-MANAGED</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -91,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="src\UI\UI_Component.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SceneRedactor-UI\Com_Bar_Element.h">
+      <Filter>SceneRedactor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\NON-MANAGED\Icon.h">
+      <Filter>UI\NON-MANAGED</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

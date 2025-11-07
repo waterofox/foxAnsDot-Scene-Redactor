@@ -5,6 +5,8 @@
 #include "UI/LAYOUT/Horizontal_Layout.h"
 #include "UI/LAYOUT/Vertical_Layout.h"
 #include "UI/MANAGED/Scrollbar.h"
+#include "UI/NON-MANAGED/Icon.h"
+#include "SceneRedactor-UI/Com_Bar_Element.h"
 
 void process_event_function(Core* the_core);
 void zaticka(Core* the_core, Scene_Component* component);
@@ -12,6 +14,8 @@ void Application::init_resources()
 {
 	resource_manager.add_font("src\\resources\\fonts\\Monaspace Neon\\MonaspaceNeon-Medium.otf", MonaspaceNeon_Medium);
 	resource_manager.font(MonaspaceNeon_Medium).setSmooth(false);
+
+	resource_manager.add_texture("src\\resources\\icons\\component_icon.png",scene_component_icon);
 }
 void Application::clear_key(Application& application,const sf::Keyboard::Scancode& scancode)
 {
@@ -67,98 +71,16 @@ Application::Application()
 	camera.setCenter(sf::Vector2f(0, 0));
 	this->set_camera_mod(Core::camera_settings::static_camera);
 
-	//interface
-	
-	//main
-	Vertical_Layout application_layout;
-	application_layout.make_main();
-	application_layout.body.setFillColor(sf::Color(22, 26, 31));
-	application_layout.set_align(Layout::align::left);
+	//INTERFACE FKLKJFJSFJSDKFLSLJFSLKD
 
-	//command menu
-	Horizontal_Layout command_menu;
-	command_menu.set_min_heigth(50);
-	command_menu.body.setFillColor(sf::Color(85,97,120));
+	Com_Bar_Element test;
+	test.get_type_of_resource() = Resource_Manager::resource_type::texture;
+	test.get_resource() = system_icons::scene_component_icon;
 
-	Input_Line line;
-	line.set_max_width(800);
-	line.set_max_heigth(50);
+	test.body.setSize(sf::Vector2f(300, 25));
 
-	line.body.setFillColor(sf::Color::Yellow);
-
-	line.get_resource() = MonaspaceNeon_Medium;
-	line.get_type_of_resource() = Resource_Manager::resource_type::font;
-
-	command_menu.add_component(&line);
-	command_menu.set_align(Layout::align::center);
-
-	//scene components & properties
-	Vertical_Layout menu;
-	menu.body.setFillColor(sf::Color(42, 49, 59));
-	
-	Scrollbar components;
-
-	Horizontal_Layout a; a.body.setFillColor(sf::Color::Green); a.body.setOutlineThickness(-1); a.body.setOutlineColor(sf::Color::Black);
-	Horizontal_Layout b; b.body.setFillColor(sf::Color::Blue); b.body.setOutlineThickness(-1); b.body.setOutlineColor(sf::Color::Black);
-	Horizontal_Layout c; c.body.setFillColor(sf::Color::Cyan); c.body.setOutlineThickness(-1); c.body.setOutlineColor(sf::Color::Black);
-	Horizontal_Layout d; d.body.setFillColor(sf::Color::Yellow); d.body.setOutlineThickness(-1); d.body.setOutlineColor(sf::Color::Black);
-	Horizontal_Layout e; e.body.setFillColor(sf::Color::White); e.body.setOutlineThickness(-1); e.body.setOutlineColor(sf::Color::Black);
-	Horizontal_Layout f; f.body.setFillColor(sf::Color::Magenta); f.body.setOutlineThickness(-1); f.body.setOutlineColor(sf::Color::Black);
-
-	components.set_showed_elements_count(3);
-	components.add_element(&a);
-	components.add_element(&b);
-	components.add_element(&c);
-	components.add_element(&d);
-	components.add_element(&e);
-	components.add_element(&f);
-
-	components.set_max_heigth(400);
-	menu.add_component(&components);
-
-	components.get_type_of_resource() = Resource_Manager::resource_type::font;
-	components.get_resource() = MonaspaceNeon_Medium;
-
-
-
-	//scene
-	Horizontal_Layout scene_layout;
-
-	//work_area
-	Horizontal_Layout work_area;
-	work_area.add_component(&scene_layout, 7);
-	work_area.add_component(&menu, 2);
-
-
-	application_layout.add_component(&command_menu,1);
-	application_layout.add_component(&work_area,20);
-
-	//build scene
-	Core::lay_type layouts;
-	Core::lay_type layouts2;
-	Core::lay_type lay_of_ui_components;
-	Core::lay_type bar_components;
-	layouts.emplace("main_Layout", &application_layout);
-	layouts2.emplace("command_menu", &command_menu);
-	layouts2.emplace("work_layout", &work_area);
-	layouts2.emplace("menu", &menu);
-
-	lay_of_ui_components.emplace("input_line", &line);
-	lay_of_ui_components.emplace("scene_components_bar", &components);
-
-	bar_components.emplace("a", &a);
-	bar_components.emplace("b", &b);
-	bar_components.emplace("c", &c);
-	bar_components.emplace("d", &d);
-	bar_components.emplace("e", &e);
-	bar_components.emplace("f", &f);
-
-
-	scene.push_back(layouts);
-	scene.push_back(layouts2);
-	scene.push_back(lay_of_ui_components);
-	scene.push_back(bar_components);
-	
+	Core::lay_type lay0; lay0.emplace("test", &test);
+	scene.push_back(lay0);
 
 	this->run(800, 800, "foxAndDot Scene Redactor", sf::State::Windowed);
 }

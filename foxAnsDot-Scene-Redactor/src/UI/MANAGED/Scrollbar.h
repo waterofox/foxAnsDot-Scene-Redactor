@@ -8,21 +8,23 @@ class Scrollbar : public Horizontal_Layout
 {
 	//bar	
 	Vertical_Layout bar;
-
-	int showed_members_count = 0;
 	std::vector<UI_Component*> bar_members;
+	//bar data
+	int showed_members_count = 0;
 
-	//scroll
+	//scroll 
 	Button* to_up = nullptr;
 	Button* to_down = nullptr;
-	bool is_scrolled = false;
-
-	int top_border = 0;
 
 	void handle_buttons(Core* the_core, Scene_Component* button);
+	
+	//scroll data
+	bool is_scrolled = false;
+	int top_border = 0;
 
+	//scroll view
 	Vertical_Layout slider_area;
-	sf::FloatRect slider;
+	sf::RectangleShape slider;
 
 	Horizontal_Layout top_section;
 	Horizontal_Layout bottom_section;
