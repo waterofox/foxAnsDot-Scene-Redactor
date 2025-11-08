@@ -45,4 +45,6 @@ Label::Label(const std::string& text) //: sf::Text(defualt_font, text)
 	this->get_type_of_resource() = Resource_Manager::resource_type::font;
 }
 
-Label::~Label() { if (label != nullptr) { delete label; } }
+Label::~Label() {
+	if (label != nullptr) { delete label; } 
+}

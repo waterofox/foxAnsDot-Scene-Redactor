@@ -72,15 +72,8 @@ Application::Application()
 	this->set_camera_mod(Core::camera_settings::static_camera);
 
 	//INTERFACE FKLKJFJSFJSDKFLSLJFSLKD
-
-	Com_Bar_Element test;
-	test.get_type_of_resource() = Resource_Manager::resource_type::texture;
-	test.get_resource() = system_icons::scene_component_icon;
-
-	test.body.setSize(sf::Vector2f(300, 25));
-
-	Core::lay_type lay0; lay0.emplace("test", &test);
-	scene.push_back(lay0);
+	
+	init_interface();
 
 	this->run(800, 800, "foxAndDot Scene Redactor", sf::State::Windowed);
 }
@@ -109,6 +102,80 @@ void Application::parse_config()
 	config >> buffer >> this->config.display_heigth;
 	config >> buffer >> this->config.display_width;
 
+}
+
+void Application::init_interface()
+{
+	application_layout = new Vertical_Layout();
+	application_layout->make_main();
+
+	//buttons
+	command_menu_buttons = new std::vector<Button*>(3);
+
+	(*command_menu_buttons)[0] = new Button("file", zaticka);
+	(*command_menu_buttons)[0]->name() = "file_button";
+	(*command_menu_buttons)[1] = new Button("scene", zaticka);
+	(*command_menu_buttons)[1]->name() = "scene_button";
+	(*command_menu_buttons)[2] = new Button("settings", zaticka);
+	(*command_menu_buttons)[2]->name() = "settings_button";
+
+
+	command_menu_layout = new Horizontal_Layout();
+	for (int i = 0; i < command_menu_buttons->size(); ++i)
+	{
+		(*command_menu_buttons)[i]->set_max_width(200);
+		(*command_menu_buttons)[i]->get_resource() = system_fonts::MonaspaceNeon_Medium;
+		command_menu_layout->add_component((*command_menu_buttons)[i]);
+	}
+	command_menu_layout->set_align(Layout::align::left);
+	command_menu_layout->set_max_heigth(config.display_width / 75);
+	command_menu_layout->set_min_heigth(config.display_width / 75);
+	
+	application_layout->add_component(command_menu_layout);
+
+	//components bar
+	info_area_layout = new Vertical_Layout();
+
+	components_bar = new Scrollbar();
+	components_bar->set_max_heigth(600);
+	components_bar->get_type_of_resource() = Resource_Manager::resource_type::font;
+	components_bar->get_resource() = system_fonts::MonaspaceNeon_Medium;
+
+	info_area_layout->add_component(components_bar);
+	info_area_layout->set_min_width(200);
+	info_area_layout->set_max_width(500);
+
+	work_area_layout = new Horizontal_Layout();
+	scene_area_layout = new Horizontal_Layout;
+
+	work_area_layout->add_component(scene_area_layout);
+	work_area_layout->add_component(info_area_layout);
+
+	work_area_layout->set_align(Layout::align::rigth);
+
+	application_layout->add_component(work_area_layout);
+	
+	//SCENE
+
+	Core::lay_type layouts_lay;
+	layouts_lay.emplace("main", application_layout);
+	layouts_lay.emplace("commands_menu", command_menu_layout);
+	layouts_lay.emplace("work_area", work_area_layout);
+	layouts_lay.emplace("scene_area", scene_area_layout);
+	layouts_lay.emplace("info_area", info_area_layout);
+
+	Core::lay_type base_ui_lay;
+	for (int i = 0; i < command_menu_buttons->size(); ++i) 
+	{
+		base_ui_lay.emplace((*command_menu_buttons)[i]->name(),(*command_menu_buttons)[i]);
+	}
+
+
+
+	base_ui_lay.emplace("components_bar", components_bar);
+
+	scene.push_back(layouts_lay);
+	scene.push_back(base_ui_lay);
 }
 
 

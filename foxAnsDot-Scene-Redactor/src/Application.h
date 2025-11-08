@@ -14,6 +14,13 @@
 
 #define window_title "foxAndDot SDK - Scen Redactor"
 
+class Vertical_Layout;
+class Horizontal_Layout;
+class Scrollbar;
+class Button;
+class Com_Bar_Element;
+
+
 class Application : public Core
 {
 	struct parsed_config
@@ -49,6 +56,26 @@ public:
 	};
 private:
 	void init_resources();
+
+//---------------------------------------------------------------
+	//INTERFACE COMPONENTS & MODELS
+
+	//layouts
+	Vertical_Layout  *   application_layout  = nullptr;
+	Horizontal_Layout*   command_menu_layout = nullptr;
+	Horizontal_Layout*   work_area_layout    = nullptr;
+	Horizontal_Layout*   scene_area_layout   = nullptr;
+	Vertical_Layout  *   info_area_layout    = nullptr;
+
+	//ui
+	Scrollbar* components_bar = nullptr;
+//	std::map<std::string, Com_Bar_Element*>* elements_in_scrollbar;
+
+	std::vector<Button*>* command_menu_buttons;
+
+	
+	void init_interface();
+	
 public:
 //---------------------------------------------------------------
 	//mous & keyboard handling
