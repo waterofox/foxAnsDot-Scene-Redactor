@@ -22,9 +22,9 @@ void Icon::update(Core* the_core)
 {
 	icon->setPosition(body.getPosition());
 
-	icon->setTextureRect(sf::IntRect(sf::Vector2i(0,0),sf::Vector2i(8,8)));
-	float ratio_x = body.getSize().x / icon->getTexture().getSize().x;
-	float ratio_y = body.getSize().y / icon->getTexture().getSize().y;
+	icon->setTextureRect(sf::IntRect(sf::Vector2i(0,0),sf::Vector2i(32,32)));
+	double ratio_x = body.getSize().x / icon->getTexture().getSize().x;
+	double ratio_y = body.getSize().y / icon->getTexture().getSize().y;
 
 	icon->setScale(sf::Vector2f(ratio_x, ratio_y));
 }

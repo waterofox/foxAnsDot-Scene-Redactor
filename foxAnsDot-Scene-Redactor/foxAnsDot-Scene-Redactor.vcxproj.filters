@@ -34,6 +34,9 @@
     <Filter Include="SceneRedactor">
       <UniqueIdentifier>{51ab4638-1fb4-4ac1-965e-e5d734d2543b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\MANAGED\Buttons">
+      <UniqueIdentifier>{16b67994-0ee2-4b68-90a3-0bf7503ef5c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -41,9 +44,6 @@
     </ClCompile>
     <ClCompile Include="src\Application.cpp">
       <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\MANAGED\Button.cpp">
-      <Filter>UI\MANAGED</Filter>
     </ClCompile>
     <ClCompile Include="src\UI\MANAGED\Input_Line.cpp">
       <Filter>UI\MANAGED</Filter>
@@ -72,13 +72,16 @@
     <ClCompile Include="src\UI\NON-MANAGED\Icon.cpp">
       <Filter>UI\NON-MANAGED</Filter>
     </ClCompile>
+    <ClCompile Include="src\UI\MANAGED\Button.cpp">
+      <Filter>UI\MANAGED\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\MANAGED\Button_Icon.cpp">
+      <Filter>UI\MANAGED\Buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
       <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI\MANAGED\Button.h">
-      <Filter>UI\MANAGED</Filter>
     </ClInclude>
     <ClInclude Include="src\UI\MANAGED\Input_Line.h">
       <Filter>UI\MANAGED</Filter>
@@ -106,6 +109,12 @@
     </ClInclude>
     <ClInclude Include="src\UI\NON-MANAGED\Icon.h">
       <Filter>UI\NON-MANAGED</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\MANAGED\Button.h">
+      <Filter>UI\MANAGED\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\MANAGED\Button_Icon.h">
+      <Filter>UI\MANAGED\Buttons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -143,6 +143,7 @@
     <ClCompile Include="src\UI\LAYOUT\Horizontal_Layout.cpp" />
     <ClCompile Include="src\UI\LAYOUT\Vertical_Layout.cpp" />
     <ClCompile Include="src\UI\MANAGED\Button.cpp" />
+    <ClCompile Include="src\UI\MANAGED\Button_Icon.cpp" />
     <ClCompile Include="src\UI\MANAGED\Input_Line.cpp" />
     <ClCompile Include="src\UI\MANAGED\Scrollbar.cpp" />
     <ClCompile Include="src\UI\NON-MANAGED\Icon.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="src\UI\LAYOUT\Horizontal_Layout.h" />
     <ClInclude Include="src\UI\LAYOUT\Vertical_Layout.h" />
     <ClInclude Include="src\UI\MANAGED\Button.h" />
+    <ClInclude Include="src\UI\MANAGED\Button_Icon.h" />
     <ClInclude Include="src\UI\MANAGED\Input_Line.h" />
     <ClInclude Include="src\UI\MANAGED\Scrollbar.h" />
     <ClInclude Include="src\UI\NON-MANAGED\Icon.h" />

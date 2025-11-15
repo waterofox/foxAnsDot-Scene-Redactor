@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+
 //SDK
 #include <foxAndDot-SDK/Core.h>
 
@@ -14,11 +15,21 @@
 
 #define window_title "foxAndDot SDK - Scen Redactor"
 
+//system colors
+#define       BASE_COLOR sf::Color(216 ,216,216 )
+#define DARK_DARK_BASE_COLOR sf::Color(136 ,136,136)
+#define  DARK_BASE_COLOR sf::Color(170 ,170, 170 )
+#define       LINE_COLOR sf::Color(33,37,255)
+#define LIGHT_LINE_COLOR sf::Color(60,63,255)
+#define  DARK_LINE_COLOR sf::Color(0,4,228)
+
 class Vertical_Layout;
 class Horizontal_Layout;
 class Scrollbar;
 class Button;
+class Button_Icon;
 class Com_Bar_Element;
+class Icon;
 
 
 class Application : public Core
@@ -52,7 +63,17 @@ public:
 	};
 	enum system_icons
 	{
-		scene_component_icon
+		scene_component_icon,
+		open_folder_icon,
+		closed_folder_icon,
+		save_icon,
+		save_all_icon,
+		ctrlZ_icon,
+		ctrlY_icon,
+		cursor_icon,
+		move_icon,
+		zoom_icon,
+		test,
 	};
 private:
 	void init_resources();
@@ -63,16 +84,19 @@ private:
 	//layouts
 	Vertical_Layout  *   application_layout  = nullptr;
 	Horizontal_Layout*   command_menu_layout = nullptr;
+	Horizontal_Layout* tools_menu_layout     = nullptr;
 	Horizontal_Layout*   work_area_layout    = nullptr;
-	Horizontal_Layout*   scene_area_layout   = nullptr;
+	Vertical_Layout*   scene_area_layout   = nullptr;
 	Vertical_Layout  *   info_area_layout    = nullptr;
 
 	//ui
 	Scrollbar* components_bar = nullptr;
+	//std::vector<Icon>* tools_buttons = nullptr;
 //	std::map<std::string, Com_Bar_Element*>* elements_in_scrollbar;
 
-	std::vector<Button*>* command_menu_buttons;
 
+	Button* command_menu_buttons[4];
+	Button_Icon* tools_menu_buttons[8];
 	
 	void init_interface();
 	
@@ -93,6 +117,7 @@ public:
 private:
 	void run(const unsigned int& window_width, const unsigned int& window_height, const std::string& title, const sf::State& state);
 	void parse_config();
+
 public:
 	Application();
 	~Application();
